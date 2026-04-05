@@ -1,0 +1,83 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import useSound from "use-sound";
+import MagneticWrapper from "@/components/ui/MagneticWrapper";
+
+const SECTIONS = [
+  { id: "intro",      label: "Home" },
+  { id: "about",      label: "About" },
+  { id: "projects",   label: "Projects" },
+  { id: "experience", label: "Exp" },
+  { id: "education",  label: "Education" },
+  { id: "skills",     label: "Skills" },
+  { id: "contact",    label: "Contact" },
+];
+
+export default function NavPill() {
+  const [active, setActive] = useState("intro");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollMid = window.scrollY + window.innerHeight / 2;
+      let current = SECTIONS[0].id;
+      for (const { id } of SECTIONS) {
+        const el = document.getElementById(id);
+        if (el) {
+          const elTop = el.getBoundingClientRect().top + window.scrollY;
+          if (elTop <= scrollMid) current = id;
+        }
+      }
+      setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    const t = setTimeout(handleScroll, 120);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(t);
+    };
+  }, []);
+
+  const [playClick] = useSound("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3", { volume: 0.5 });
+
+  const handleInteraction = (id: string) => {
+    playClick();
+    if (id === "contact") {
+       window.dispatchEvent(new Event("robotWave"));
+    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <motion.div
+      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 1.5, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      <div
+        className="flex items-center gap-1 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-2 py-2 shadow-xl overflow-x-auto max-w-[calc(100vw-2rem)]"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {SECTIONS.map(({ id, label }) => (
+          <MagneticWrapper key={id}>
+            <button
+              onClick={() => handleInteraction(id)}
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase transition-all duration-300 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+                active === id
+                  ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                  : "text-white/65 hover:text-white/80"
+              }`}
+            >
+              {active === id && (
+                <span className="w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+              )}
+              {label}
+            </button>
+          </MagneticWrapper>
+        ))}
+      </div>
+    </motion.div>
+  );
+}

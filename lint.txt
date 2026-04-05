@@ -1,0 +1,28 @@
+
+F:\Data_Science\sequence\portfolio\src\app\page.tsx
+  10:8  warning  'ClientCursorGlow' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\Data_Science\sequence\portfolio\src\components\sections\Overlay.tsx
+   4:21  warning  'useState' is defined but never used                  @typescript-eslint/no-unused-vars
+  16:20  warning  'scrollYProgress' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+F:\Data_Science\sequence\portfolio\src\components\ui\ScrambleText.tsx
+  26:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+F:\Data_Science\sequence\portfolio\src\components\ui\ScrambleText.tsx:26:7
+  24 |   useEffect(() => {
+  25 |     if (!trigger) {
+> 26 |       setDisplay(text);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  27 |       if (frameRef.current) clearInterval(frameRef.current);
+  28 |       return;
+  29 |     }  react-hooks/set-state-in-effect
+
+Ô£û 4 problems (1 error, 3 warnings)
+

@@ -3,6 +3,11 @@
 :root {
   --background: #121212;
   --foreground: #ffffff;
+  --accent-blue: #00D9FF;
+  --accent-green: #00FF88;
+  --accent-amber: #FFB800;
+  --accent-purple: #B794F6;
+  --accent-coral: #FF6B6B;
 }
 
 @theme inline {
@@ -12,9 +17,29 @@
   --font-mono: var(--font-geist-mono);
 }
 
-body {
+body, html {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
   overflow-x: hidden;
 }
+
+/* Globally nuke all scrollbars but retain native scroll physics */
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome/Safari/EdgeWebkit */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Promote fixed-position layers to GPU compositing */
+canvas[style*="position: fixed"],
+.fixed {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+html { scroll-behavior: smooth; }
