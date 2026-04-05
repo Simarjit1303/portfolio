@@ -1,6 +1,5 @@
-import { Scene, NavPill } from "@/components/Dynamics";
+import { Scene, NavPill, Overlay } from "@/components/Dynamics";
 import ScrollReset from "@/components/ui/ScrollReset";
-import Overlay from "@/components/sections/Overlay";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
