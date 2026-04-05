@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 import ScrambleText from "@/components/ui/ScrambleText";
 import BerlinClock from "@/components/ui/BerlinClock";
@@ -13,7 +13,16 @@ const glassPanel: React.CSSProperties = {
 };
 
 export default function Overlay() {
-  const { scrollY } = useScroll();
+  // Native scroll tracking — reliable in all production environments
+  const scrollY = useMotionValue(0);
+
+  useEffect(() => {
+    const onScroll = () => scrollY.set(window.scrollY);
+    // Set initial value immediately on mount
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollY]);
 
   // Mouse parallax
   const rawX = useMotionValue(0);
@@ -23,7 +32,7 @@ export default function Overlay() {
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
-      const nx = (e.clientX / window.innerWidth  - 0.5) * 2; // -1 to 1
+      const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
       const ny = (e.clientY / window.innerHeight - 0.5) * 2;
       rawX.set(nx);
       rawY.set(ny);
@@ -40,7 +49,7 @@ export default function Overlay() {
   const py3 = useTransform(mouseY, [-1, 1], [-10, 10]);
 
   const progress = useTransform(scrollY, (y) => {
-    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+    const vh = window.innerHeight;
     return Math.min(1, Math.max(0, y / (vh * 4)));
   });
 
@@ -66,7 +75,7 @@ export default function Overlay() {
     <div className="absolute top-0 left-0 w-full h-[500vh] pointer-events-none" style={{ zIndex: 30 }}>
       <div className="sticky top-0 h-screen w-full">
 
-        {/* ── Section 1 — Hero (centered) ─────────────────────────────── */}
+        {/* ── Section 1 — Hero (centered) */}
         <motion.div
           style={{ opacity: opacity1, y: yTotal1, x: px1, willChange: "transform, opacity" }}
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
@@ -82,7 +91,7 @@ export default function Overlay() {
           </div>
         </motion.div>
 
-        {/* ── Section 2 — Left aligned ─────────────────────────────────── */}
+        {/* ── Section 2 — Left aligned */}
         <motion.div
           style={{ opacity: opacity2, y: yTotal2, x: px2, willChange: "transform, opacity" }}
           className="absolute inset-0 flex flex-col items-start justify-center text-left px-8 md:px-32"
@@ -95,12 +104,12 @@ export default function Overlay() {
               <AnimatedText text="Building AI That Actually Ships." delay={0.2} />
             </h2>
             <p className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.15em] max-w-md leading-relaxed uppercase">
-              Seeking Working Student & Internship roles in Data Science & AI.
+              Seeking Working Student &amp; Internship roles in Data Science &amp; AI.
             </p>
           </div>
         </motion.div>
 
-        {/* ── Section 3 — Left aligned ───────────────────────────────── */}
+        {/* ── Section 3 — Left aligned */}
         <motion.div
           style={{ opacity: opacity3, y: yTotal3, x: px3, willChange: "transform, opacity" }}
           className="absolute inset-0 flex flex-col items-start justify-center text-left px-8 md:px-32"
@@ -110,7 +119,7 @@ export default function Overlay() {
               ■ Specialising
             </p>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white mb-5 max-w-xl uppercase leading-[1.05]" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}>
-              <AnimatedText text="Machine Learning & NLP." delay={0.2} />
+              <AnimatedText text="Machine Learning &amp; NLP." delay={0.2} />
             </h2>
             <p className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.15em] max-w-md leading-relaxed uppercase">
               LLMs, RAG, and custom domains. If it doesn&apos;t ship, it&apos;s not done.
