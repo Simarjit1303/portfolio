@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Simarjit Singh | MSc Data Science & AI Portfolio",
   description: "Portfolio of Simarjit Singh, MSc Data Science & AI Student in Berlin.",
+  other: {
+    // Tell Dark Reader and all dark-mode extensions this page is already dark
+    "darkreader-lock": "",
+    "color-scheme": "dark",
+  },
 };
 
 export default function RootLayout({
