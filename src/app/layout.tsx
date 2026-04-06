@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   title: "Simarjit Singh | MSc Data Science & AI Portfolio",
   description: "Portfolio of Simarjit Singh, MSc Data Science & AI Student in Berlin.",
   other: {
-    // Tell Dark Reader and all dark-mode extensions this page is already dark
     "darkreader-lock": "",
     "color-scheme": "dark",
   },
@@ -34,6 +33,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
     >
+      <head>
+        {/* Pre-fetch the 3D robot model as early as possible to cut LCP */}
+        <link rel="preload" href="/robot.glb" as="fetch" crossOrigin="anonymous" />
+      </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {children}
         <SpeedInsights />

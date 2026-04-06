@@ -7,18 +7,19 @@ import { Group } from "three";
 
 export default function Model() {
   const groupRef = useRef<Group>(null);
-  
-  // Asynchronously parse the raw WebGL binaries from the public folder!
   const { scene, animations } = useGLTF("/robot.glb");
   const { actions } = useAnimations(animations, groupRef);
 
+  // Mouse target stored in a ref — no React re-renders on every mouse move
+  const mouse = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
-    // Start idle animation automatically
+    // Start idle skeletal animation
     if (actions["Idle"]) {
       actions["Idle"].reset().fadeIn(0.5).play();
     }
 
-    // Listen for custom global event to trigger the structural Wave
+    // Wave event trigger
     const handleWave = () => {
       if (actions["Wave"] && actions["Idle"]) {
         actions["Idle"].fadeOut(0.5);
@@ -30,20 +31,31 @@ export default function Model() {
       }
     };
 
+    // Track raw cursor position in a ref (no state updates, no re-renders)
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;   // -1 → 1
+      mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1); // -1 → 1
+    };
+
     window.addEventListener("robotWave", handleWave);
-    return () => window.removeEventListener("robotWave", handleWave);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("robotWave", handleWave);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
   }, [actions]);
 
-  // Pure WebGL physics calculating rotation toward cursor
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      // We physically rotate the entire character structure using Spring-like dampening
-      const targetX = state.pointer.x * 0.5;
-      const targetY = state.pointer.y * 0.3;
-      
-      groupRef.current.rotation.y += (targetX - groupRef.current.rotation.y) * delta * 5;
-      groupRef.current.rotation.x += (-targetY - groupRef.current.rotation.x) * delta * 5;
-    }
+  // GPU render loop — smooth cursor-tracking rotation with spring-like damping
+  useFrame((_, delta) => {
+    if (!groupRef.current) return;
+
+    // Target rotation based on cursor position
+    const targetY = mouse.current.x * 0.45;  // horizontal: follow left/right
+    const targetX = mouse.current.y * 0.15;  // vertical: subtle tilt up/down
+
+    // Exponential lerp — feels springy and responsive
+    groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * Math.min(1, delta * 4);
+    groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * Math.min(1, delta * 4);
   });
 
   return (
@@ -53,5 +65,5 @@ export default function Model() {
   );
 }
 
-// Pre-hydrate the model so there are no loading visual pops
+// Kick off GLB fetch immediately when this JS module loads
 useGLTF.preload("/robot.glb");
