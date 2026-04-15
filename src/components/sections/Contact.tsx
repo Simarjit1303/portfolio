@@ -90,7 +90,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative z-20 py-16 md:py-28 px-4 sm:px-8 md:px-16 lg:px-24 overflow-hidden"
+      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
         background:
           "linear-gradient(180deg, #121212 0%, #0d1117 50%, #121212 100%)",
@@ -104,7 +104,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto relative">
 
         {/* Header row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 pt-5 mb-12 md:mb-16 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10 gap-2">
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">
             Get In Touch
           </span>
@@ -227,12 +227,12 @@ export default function Contact() {
               <div
                 className="mt-2 flex items-center gap-2 px-3 py-2 rounded-xl"
                 style={{
-                  background: "rgba(0,255,136,0.04)",
-                  border: "1px solid rgba(0,255,136,0.15)",
+                  background: "rgba(0,217,255,0.04)",
+                  border: "1px solid rgba(0,217,255,0.15)",
                 }}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88] animate-pulse" />
-                <span className="text-[10px] font-mono tracking-[0.15em] uppercase text-[#00FF88]/70">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
+                <span className="text-[10px] font-mono tracking-[0.15em] uppercase text-[#00D9FF]/70">
                   Available · Berlin
                 </span>
               </div>

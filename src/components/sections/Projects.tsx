@@ -26,7 +26,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative z-20 py-28 px-8 md:px-24 overflow-hidden"
+      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
       style={{ background: "transparent" }}
     >
       {/* Top / bottom fade for smooth transitions */}
@@ -60,7 +60,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto relative">
 
         <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-16"
+          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}

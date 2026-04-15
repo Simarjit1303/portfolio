@@ -20,8 +20,20 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Simarjit Singh | MSc Data Science & AI Portfolio",
-  description: "Portfolio of Simarjit Singh, MSc Data Science & AI Student in Berlin.",
+  title: "Simarjit Singh | Data Scientist & AI Engineer — Berlin",
+  description: "Portfolio of Simarjit Singh — MSc Data Science & AI, Berlin. Building end-to-end ML pipelines, GenAI apps, and data products. Open to internship & working student roles.",
+  openGraph: {
+    title: "Simarjit Singh | Data Scientist & AI Engineer",
+    description: "ML pipelines, GenAI applications, and data products. Open to internship and working student roles in Berlin.",
+    siteName: "Simarjit Singh Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Simarjit Singh | Data Scientist & AI Engineer",
+    description: "ML pipelines, GenAI apps, data products. Open to Berlin roles.",
+  },
   other: {
     "darkreader-lock": "",
     "color-scheme": "dark",
