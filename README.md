@@ -14,11 +14,11 @@ Personal portfolio website for Simarjit Singh, MSc Data Science student at GISMA
 
 ## Features
 
-- Scroll-driven hero with three animated text panels
+- Scroll-driven hero with 3D robot and animated name scramble
 - Interactive 3D robot (mouse-tracking rotation, wave animation)
 - NavPill navigation (7 sections, smooth scroll, accessibility compliant)
 - Projects, Experience, Education, Skills, Contact sections
-- Contact form with styled inline validation
+- Contact form with email app picker (Gmail / Outlook / native mailto)
 - Fully responsive (mobile / tablet / desktop)
 
 ## Getting Started
