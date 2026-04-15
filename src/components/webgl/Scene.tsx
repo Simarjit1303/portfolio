@@ -2,7 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState, useEffect } from "react";
-import Model from "./Model";
+import Model from "@/components/webgl/Model";
 
 export default function Scene() {
   return (

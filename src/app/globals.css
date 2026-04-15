@@ -43,4 +43,6 @@ canvas[style*="position: fixed"],
   transform: translateZ(0);
   backface-visibility: hidden;
 }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
