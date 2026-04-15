@@ -188,17 +188,20 @@ export default function Skills() {
               <h4 className="text-xs font-mono tracking-[0.2em] text-white/55 uppercase mb-5">Languages</h4>
               <div className="space-y-0">
                 {[
-                  { lang: "English", level: "Professional", pct: 95 },
-                  { lang: "German",  level: "Basic (A2)",   pct: 20 },
-                ].map(({ lang, level, pct }) => (
-                  <div key={lang} className="py-3.5 border-b border-white/[0.05] last:border-0">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-white/75 font-mono text-xs">{lang}</span>
-                      <span className="text-white/55 text-[10px] font-mono tracking-[0.15em] uppercase">{level}</span>
-                    </div>
-                    <div className="h-0.5 bg-white/[0.06] rounded-full overflow-hidden">
-                      <div className="h-full rounded-full"
-                        style={{ width: `${pct}%`, background: "linear-gradient(90deg, #00D9FF, #B794F6)" }} />
+                  { lang: "English", badge: "C1", sub: "Professional" },
+                  { lang: "German",  badge: "A2", sub: "B1 In Progress" },
+                  { lang: "Hindi",   badge: null, sub: "Native" },
+                  { lang: "Punjabi", badge: null, sub: "Native" },
+                ].map(({ lang, badge, sub }) => (
+                  <div key={lang} className="flex items-center justify-between py-3.5 border-b border-white/[0.05] last:border-0">
+                    <span className="text-white/75 font-mono text-xs">{lang}</span>
+                    <div className="flex items-center gap-2">
+                      {badge && (
+                        <span className="text-[9px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded-full border border-[#00D9FF]/30 text-[#00D9FF]/70 bg-[#00D9FF]/[0.05]">
+                          {badge}
+                        </span>
+                      )}
+                      <span className="text-white/40 text-[10px] font-mono tracking-[0.12em] uppercase">{sub}</span>
                     </div>
                   </div>
                 ))}

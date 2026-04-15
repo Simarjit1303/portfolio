@@ -9,7 +9,7 @@ export default function Experience() {
     <section
       id="experience"
       className="relative z-20 min-h-screen flex flex-col justify-start overflow-hidden px-8 md:px-24"
-      style={{ paddingTop: "36vh", paddingBottom: "8vh" }}
+      style={{ paddingTop: "7rem", paddingBottom: "7rem" }}
     >
       {/* Decorative background number */}
       <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
