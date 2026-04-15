@@ -46,7 +46,7 @@ export default function Model() {
   }, [actions]);
 
   // GPU render loop — smooth cursor-tracking rotation with spring-like damping
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (!groupRef.current) return;
 
     // Target rotation based on cursor position
@@ -56,6 +56,9 @@ export default function Model() {
     // Exponential lerp — feels springy and responsive
     groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * Math.min(1, delta * 4);
     groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * Math.min(1, delta * 4);
+
+    // Idle float — gentle sine wave on Y axis
+    groupRef.current.position.y = -3.8 + Math.sin(state.clock.elapsedTime * 0.7) * 0.06;
   });
 
   return (

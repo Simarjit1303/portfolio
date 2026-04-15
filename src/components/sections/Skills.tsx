@@ -132,7 +132,7 @@ export default function Skills() {
               style={{ backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", background: "rgba(10,10,16,0.65)" }}
             >
               <h4 className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
-                style={{ background: "linear-gradient(90deg, #ffffff, #B794F6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Certifications
               </h4>
               <ul className="space-y-3">
