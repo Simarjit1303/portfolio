@@ -32,7 +32,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
 
 export default function About() {
   return (
-    <section id="about" className="relative z-20 py-28 px-8 md:px-24 overflow-hidden"
+    <section id="about" className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
       style={{ background: "transparent" }}
     >
       {/* Top fade */}
@@ -51,7 +51,7 @@ export default function About() {
 
         {/* Section header */}
         <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-16"
+          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
@@ -65,7 +65,7 @@ export default function About() {
 
           {/* Left — bio */}
           <motion.div
-            className="lg:col-span-3 space-y-7"
+            className="lg:col-span-3 space-y-4 md:space-y-5"
             variants={stagger}
             initial="hidden"
             whileInView="show"
@@ -100,7 +100,7 @@ export default function About() {
             </motion.p>
 
             {/* Stats row */}
-            <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+            <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
               {stats.map(({ num, label }, idx) => (
                 <AnimatedStat key={label} numStr={num} label={label} delay={idx * 150} />
               ))}

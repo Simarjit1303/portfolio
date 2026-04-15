@@ -19,17 +19,23 @@ export default function NavPill() {
   const [active, setActive] = useState("intro");
 
   useEffect(() => {
+    // Use getBoundingClientRect + scrollY for document-absolute position.
+    // el.offsetTop is relative to the nearest positioned ancestor — unreliable
+    // when sections sit inside a position:relative wrapper div.
+    const docTop = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY;
+
     const handleScroll = () => {
       const scrollMid = window.scrollY + window.innerHeight / 2;
       let current = SECTIONS[0].id;
       for (const { id } of SECTIONS) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollMid) current = id;
+        if (el && docTop(el) <= scrollMid) current = id;
       }
       setActive(current);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    const t = setTimeout(handleScroll, 120);
+    // Fire immediately after first paint so initial active state is correct
+    const t = setTimeout(handleScroll, 50);
     return () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(t);
@@ -52,7 +58,7 @@ export default function NavPill() {
       className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
       initial={{ y: 80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1.5, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ delay: 0.5, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <div
         className="flex items-center gap-1 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-2 py-2 shadow-xl overflow-x-auto max-w-[calc(100vw-2rem)]"

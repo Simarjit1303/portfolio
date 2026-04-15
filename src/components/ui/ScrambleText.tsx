@@ -53,5 +53,11 @@ export default function ScrambleText({
     };
   }, [trigger, text, speed]);
 
-  return <span className={className}>{display}</span>;
+  return (
+    <span className={className}>
+      {/* Hide scrambled characters from screen readers; sr-only span provides real text */}
+      <span aria-hidden="true">{display}</span>
+      <span className="sr-only">{text}</span>
+    </span>
+  );
 }

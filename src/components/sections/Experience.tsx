@@ -8,8 +8,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative z-20 min-h-screen flex flex-col justify-start overflow-hidden px-8 md:px-24"
-      style={{ paddingTop: "7rem", paddingBottom: "7rem" }}
+      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 overflow-hidden px-8 md:px-24"
     >
       {/* Decorative background number */}
       <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
@@ -26,7 +25,7 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto relative w-full">
 
         <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-12"
+          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}

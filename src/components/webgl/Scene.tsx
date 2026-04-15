@@ -1,15 +1,18 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState } from "react";
 import Model from "@/components/webgl/Model";
 
 export default function Scene() {
+  // Hide loader once the GLB model has actually mounted (Suspense resolved)
+  const [modelLoaded, setModelLoaded] = useState(false);
+
   return (
     <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: "none" }}>
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
-        dpr={[1, 1]}
+        dpr={[1, 2]}
         flat
         performance={{ min: 0.5 }}
         gl={{
@@ -29,39 +32,26 @@ export default function Scene() {
         {/* No Float wrapper — Model handles mouse-tracking rotation directly */}
         {/* No EffectComposer / Bloom / ContactShadows — major INP & LCP win */}
         <Suspense fallback={null}>
-          <Model />
+          <Model onLoad={() => setModelLoaded(true)} />
         </Suspense>
       </Canvas>
 
-      <FallbackLoader />
-    </div>
-  );
-}
-
-function FallbackLoader() {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    // Fade out after 2.5s max — real load is signalled by Suspense resolving
-    const t = setTimeout(() => setVisible(false), 2500);
-    return () => clearTimeout(t);
-  }, []);
-
-  return (
-    <div
-      className="fixed inset-0 flex items-center justify-center bg-[#0d1117]"
-      style={{
-        zIndex: 50,
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.6s ease",
-      }}
-    >
-      <div className="flex flex-col items-center gap-4">
-        <span className="w-10 h-10 rounded-full border-4 border-[#00D9FF]/20 border-t-[#00D9FF] animate-spin" />
-        <p className="text-white/60 font-mono text-xs tracking-widest uppercase">
-          Loading Experience...
-        </p>
+      {/* Loader disappears the moment the GLB finishes loading, not on a timer */}
+      <div
+        className="fixed inset-0 flex items-center justify-center bg-[#0d1117]"
+        style={{
+          zIndex: 50,
+          opacity: modelLoaded ? 0 : 1,
+          pointerEvents: modelLoaded ? "none" : "auto",
+          transition: "opacity 0.6s ease",
+        }}
+      >
+        <div className="flex flex-col items-center gap-4">
+          <span className="w-10 h-10 rounded-full border-4 border-[#00D9FF]/20 border-t-[#00D9FF] animate-spin" />
+          <p className="text-white/60 font-mono text-xs tracking-widest uppercase">
+            Loading Experience...
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group } from "three";
 
-export default function Model() {
+export default function Model({ onLoad }: { onLoad?: () => void }) {
   const groupRef = useRef<Group>(null);
   const { scene, animations } = useGLTF("/robot.glb");
   const { actions } = useAnimations(animations, groupRef);
@@ -14,6 +14,9 @@ export default function Model() {
   const mouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    // Signal to Scene.tsx that the GLB has loaded and component has mounted
+    onLoad?.();
+
     // Start idle skeletal animation
     if (actions["Idle"]) {
       actions["Idle"].reset().fadeIn(0.5).play();
