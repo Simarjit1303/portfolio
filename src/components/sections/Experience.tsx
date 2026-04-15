@@ -33,6 +33,7 @@ export default function Experience() {
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Experience</span>
+
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{experiences.length} Roles</span>
         </motion.div>
 

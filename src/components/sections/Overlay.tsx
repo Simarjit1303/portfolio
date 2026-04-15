@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import ScrambleText from "@/components/ui/ScrambleText";
 import BerlinClock from "@/components/ui/BerlinClock";
+import MagneticWrapper from "@/components/ui/MagneticWrapper";
 
 
 // ---- pure math helpers (no deps) ------------------------------------
@@ -88,13 +89,18 @@ export default function Overlay() {
             </p>
             <BerlinClock />
             <div className="mt-8 pointer-events-auto">
-              <button
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-300"
-              >
-                View My Work
-                <span className="animate-bounce">↓</span>
-              </button>
+              <MagneticWrapper>
+                <button
+                  onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-300"
+                >
+                  View My Work
+                  <motion.span
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >↓</motion.span>
+                </button>
+              </MagneticWrapper>
             </div>
           </motion.div>
         </div>

@@ -1,5 +1,4 @@
 export const facts = [
-  { label: "Age",        value: "24" },
   { label: "Based In",   value: "Berlin, Germany" },
   { label: "University", value: "GISMA — Potsdam" },
   { label: "Degree",     value: "MSc Data Science & AI" },
