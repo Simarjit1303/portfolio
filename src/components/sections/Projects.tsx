@@ -72,7 +72,7 @@ export default function Projects() {
           >
             {projects.map((p, i) => (
               <motion.a
-                key={i}
+                key={p.num}
                 href={p.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -95,6 +95,7 @@ export default function Projects() {
 
                 <div className="flex items-center gap-6 pl-4">
                   <span
+                    aria-hidden="true"
                     className="text-[11px] font-mono tracking-[0.2em] transition-colors duration-300"
                     style={{ color: hovered === i ? p.color : "rgba(255,255,255,0.2)" }}
                   >
@@ -206,10 +207,10 @@ export default function Projects() {
                   className="rounded-2xl border border-white/[0.08] p-7 flex flex-col items-start justify-center min-h-[220px]"
                   style={{ background: "rgba(10,10,16,0.97)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
                 >
-                  <p className="text-white/42 font-mono text-[11px] tracking-[0.2em] uppercase">
+                  <p aria-hidden="true" className="text-white/42 font-mono text-[11px] tracking-[0.2em] uppercase">
                     Select a project
                   </p>
-                  <p className="text-white/28 font-mono text-[10px] tracking-[0.15em] uppercase mt-1">
+                  <p aria-hidden="true" className="text-white/28 font-mono text-[10px] tracking-[0.15em] uppercase mt-1">
                     hover or tap to explore
                   </p>
                 </motion.div>

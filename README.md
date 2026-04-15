@@ -1,114 +1,52 @@
-# Interactive WebGL Data Science Portfolio
+# Simarjit Singh — Portfolio
 
-> 🌐 **Live at [simarjit.de](https://www.simarjit.de)**
+Personal portfolio website for Simarjit Singh, MSc Data Science student at GISMA University, Berlin.
 
-A high-performance, immersive 3D portfolio built with React Three Fiber, Framer Motion, and Next.js 16 (App Router). Features a GPU-accelerated WebGL pipeline with a skeletal-animated robot, cinematic post-processing, magnetic UI physics, and scroll-driven storytelling.
+**Live:** https://simarjit.de
 
----
+## Tech Stack
 
-## ⚡ Core Architecture
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Styling:** Tailwind CSS v4
+- **Animation:** Framer Motion, custom scroll-driven DOM animations
+- **3D:** React Three Fiber + Three.js (robot GLB with skeletal animations)
+- **Language:** TypeScript
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router, Turbopack) |
-| 3D Engine | React Three Fiber + three.js |
-| Post-Processing | `@react-three/postprocessing` — Bloom, Vignette |
-| Physics & Animations | Framer Motion (spring physics, magnetic UI) |
-| Styling | Tailwind CSS v4 |
-| Audio | `use-sound` (tactile UI haptics) |
-| Analytics | Vercel Speed Insights + Web Analytics |
-| DNS | Cloudflare (DDoS protection, global CDN) |
-| Deployment | Vercel (auto-deploy on push) |
+## Features
 
----
+- Scroll-driven hero with three animated text panels
+- Interactive 3D robot (mouse-tracking rotation, wave animation)
+- NavPill navigation (7 sections, smooth scroll, accessibility compliant)
+- Projects, Experience, Education, Skills, Contact sections
+- Contact form with styled inline validation
+- Fully responsive (mobile / tablet / desktop)
 
-## 📁 Project Structure
+## Getting Started
 
-```text
-portfolio/
-├── public/                  (Raw Assets)
-│   ├── robot.glb            (WebGL Skeletal Model)
-│   └── Resume_Photo.png     (Static Profile Image)
-│
-└── src/
-    ├── app/                 (Next.js App Router)
-    │   ├── globals.css      (Tailwind Directives & CSS Variables)
-    │   ├── layout.tsx       (Server DOM Wrapper + SEO Meta)
-    │   └── page.tsx         (Main Component Pipeline)
-    │
-    ├── components/          (Strict React Domains)
-    │   ├── Dynamics.tsx     (SSR-safe barrel — next/dynamic boundaries)
-    │   ├── webgl/           (3D Render Layer)
-    │   │   ├── Scene.tsx    (Canvas, Lighting, Post-Processing)
-    │   │   └── Model.tsx    (glTF Skeletal Binding & Mouse Physics)
-    │   ├── sections/        (Macroscopic Page Sections)
-    │   │   ├── Overlay.tsx  (Scroll-driven Hero Storytelling)
-    │   │   ├── About.tsx
-    │   │   ├── Projects.tsx
-    │   │   ├── Experience.tsx
-    │   │   ├── Education.tsx
-    │   │   ├── Skills.tsx
-    │   │   └── Contact.tsx
-    │   └── ui/              (Atomic Interface Elements)
-    │       ├── NavPill.tsx
-    │       ├── MagneticWrapper.tsx
-    │       ├── AnimatedText.tsx
-    │       ├── ScrambleText.tsx
-    │       ├── BerlinClock.tsx
-    │       └── ScrollReset.tsx
-    │
-    ├── data/                (Centralized Content Hub)
-    │   └── portfolio.ts     (All projects, experience & skills data)
-    │
-    ├── hooks/               (Custom React Hooks)
-    │   └── useCountUp.ts    (Animated number counter)
-    │
-    └── lib/                 (Global Utilities)
-        └── animations.ts    (Framer Motion transition variants)
+```bash
+npm install
+npm run dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000).
 
-## 🚀 Getting Started
+## Build
 
-1. Clone this repository:
+```bash
+npm run build
+npm start
+```
 
-   ```bash
-   git clone https://github.com/Simarjit1303/portfolio.git
-   cd portfolio
-   ```
+## Project Structure
 
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Open `http://localhost:3000` in your browser.
-
----
-
-## 🖥 Deployment
-
-The site is deployed on **Vercel** with auto-deployment configured on every push to the `portfolio-website` branch.
-
-- **Domain:** [simarjit.de](https://www.simarjit.de)
-- **DNS/CDN:** Cloudflare (proxied for security and performance)
-- **Branch:** `portfolio-website` → production
-- **SSR Safety:** All WebGL and scroll components are wrapped in `next/dynamic` with `{ ssr: false }` via `Dynamics.tsx`, ensuring the Node.js server never attempts to render GPU-bound code.
-
-To deploy your own fork:
-1. Push to GitHub → connect to Vercel → select Next.js preset → deploy.
-
----
-
-## 📬 Contact
-
-**Simarjit Singh** — MSc Data Science & AI, Berlin  
-[simarjit.de](https://www.simarjit.de) · [GitHub](https://github.com/Simarjit1303) · [LinkedIn](https://linkedin.com/in/simarjit-singh)
+```
+src/
+  app/          # Next.js App Router (layout, page)
+  components/
+    sections/   # About, Projects, Experience, Education, Skills, Contact, Overlay
+    ui/         # NavPill, ScrambleText, AnimatedText, BerlinClock, MagneticWrapper
+    webgl/      # Scene, Model (Three.js robot)
+  data/         # portfolio.ts (projects, experience, education data)
+  hooks/        # useCountUp
+  lib/          # animations
+```

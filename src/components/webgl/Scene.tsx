@@ -6,14 +6,16 @@ import Model from "./Model";
 
 export default function Scene() {
   return (
-    <div className="fixed inset-0" style={{ zIndex: 0, pointerEvents: "none" }}>
+    <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: "none" }}>
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
-        dpr={[1, 1.5]}
+        dpr={[1, 1]}
+        flat
+        performance={{ min: 0.5 }}
         gl={{
           antialias: true,
           powerPreference: "high-performance",
-          alpha: false,
+          alpha: true,
           stencil: false,
           depth: true,
         }}

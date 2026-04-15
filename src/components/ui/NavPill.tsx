@@ -24,10 +24,7 @@ export default function NavPill() {
       let current = SECTIONS[0].id;
       for (const { id } of SECTIONS) {
         const el = document.getElementById(id);
-        if (el) {
-          const elTop = el.getBoundingClientRect().top + window.scrollY;
-          if (elTop <= scrollMid) current = id;
-        }
+        if (el && el.offsetTop <= scrollMid) current = id;
       }
       setActive(current);
     };
@@ -39,7 +36,7 @@ export default function NavPill() {
     };
   }, []);
 
-  const [playClick] = useSound("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3", { volume: 0.5 });
+  const [playClick] = useSound("/sfx/click.mp3", { volume: 0.5 });
 
   const handleInteraction = (id: string) => {
     playClick();
@@ -50,7 +47,8 @@ export default function NavPill() {
   };
 
   return (
-    <motion.div
+    <motion.nav
+      aria-label="Page navigation"
       className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
       initial={{ y: 80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -64,6 +62,7 @@ export default function NavPill() {
           <MagneticWrapper key={id}>
             <button
               onClick={() => handleInteraction(id)}
+              aria-current={active === id ? "page" : undefined}
               className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase transition-all duration-300 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
                 active === id
                   ? "bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.4)]"
@@ -78,6 +77,6 @@ export default function NavPill() {
           </MagneticWrapper>
         ))}
       </div>
-    </motion.div>
+    </motion.nav>
   );
 }

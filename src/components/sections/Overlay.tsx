@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import ScrambleText from "@/components/ui/ScrambleText";
 import BerlinClock from "@/components/ui/BerlinClock";
-import { AnimatedText } from "@/components/ui/AnimatedText";
+
 
 // ---- pure math helpers (no deps) ------------------------------------
 function clamp(v: number, lo: number, hi: number) {
@@ -17,11 +17,8 @@ function mapRange(v: number, a: number, b: number, c: number, d: number) {
 }
 
 export default function Overlay() {
-  // --- refs to each panel (scroll-driven via direct DOM, no Framer) ---
+  // --- ref to hero panel (scroll-driven via direct DOM, no Framer) ---
   const s1 = useRef<HTMLDivElement>(null);
-  const s2 = useRef<HTMLDivElement>(null);
-  const s3 = useRef<HTMLDivElement>(null);
-  const progressBar = useRef<HTMLDivElement>(null);
 
   // --- mouse parallax (Framer Motion is fine here, no scroll involved) -
   const rawX = useMotionValue(0);
@@ -30,10 +27,6 @@ export default function Overlay() {
   const my = useSpring(rawY, { stiffness: 60, damping: 20, mass: 0.5 });
   const px1 = useTransform(mx, [-1, 1], [-14, 14]);
   const py1 = useTransform(my, [-1, 1], [-9, 9]);
-  const px2 = useTransform(mx, [-1, 1], [-9, 9]);
-  const py2 = useTransform(my, [-1, 1], [-6, 6]);
-  const px3 = useTransform(mx, [-1, 1], [-11, 11]);
-  const py3 = useTransform(my, [-1, 1], [-8, 8]);
 
   useEffect(() => {
     const onMouse = (e: MouseEvent) => {
@@ -48,75 +41,31 @@ export default function Overlay() {
   useEffect(() => {
     const tick = () => {
       const vh = window.innerHeight;
-      const p = clamp(window.scrollY / (vh * 4), 0, 1);
-
-      // Section 1 — fades out 0.12 → 0.22
+      // Divisor is vh*1.3 (130vh). Hero fades out 0.30→0.70, fully gone by 91vh.
+      const p = clamp(window.scrollY / (vh * 1.3), 0, 1);
+      // Section 1 — visible until 0.30, fades out 0.30→0.70
       if (s1.current) {
-        const op = clamp(p < 0.12 ? 1 : mapRange(p, 0.12, 0.22, 1, 0), 0, 1);
-        const ty = mapRange(clamp(p, 0, 0.22), 0, 0.22, 0, -80);
+        const op = clamp(p < 0.30 ? 1 : mapRange(p, 0.30, 0.70, 1, 0), 0, 1);
+        const ty = mapRange(clamp(p, 0, 0.70), 0, 0.70, 0, -80);
         s1.current.style.opacity = String(op);
         s1.current.style.transform = `translateY(${ty}px)`;
       }
-      // Section 2 — fades in 0.28→0.36, out 0.47→0.55
-      if (s2.current) {
-        const op = clamp(
-          p < 0.28 ? 0
-          : p < 0.36 ? mapRange(p, 0.28, 0.36, 0, 1)
-          : p < 0.47 ? 1
-          : mapRange(p, 0.47, 0.55, 1, 0),
-          0, 1
-        );
-        const ty = p < 0.28 ? 80 : mapRange(clamp(p, 0.28, 0.55), 0.28, 0.55, 80, -80);
-        s2.current.style.opacity = String(op);
-        s2.current.style.transform = `translateY(${ty}px)`;
-      }
-      // Section 3 — fades in 0.62→0.70, out 0.82→0.90
-      if (s3.current) {
-        const op = clamp(
-          p < 0.62 ? 0
-          : p < 0.70 ? mapRange(p, 0.62, 0.70, 0, 1)
-          : p < 0.82 ? 1
-          : mapRange(p, 0.82, 0.90, 1, 0),
-          0, 1
-        );
-        const ty = p < 0.62 ? 80 : mapRange(clamp(p, 0.62, 0.90), 0.62, 0.90, 80, -80);
-        s3.current.style.opacity = String(op);
-        s3.current.style.transform = `translateY(${ty}px)`;
-      }
     };
 
-    const updateProgress = () => {
-      if (progressBar.current) {
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = total > 0 ? Math.min(window.scrollY / total, 1) : 0;
-        progressBar.current.style.transform = `scaleX(${pct})`;
-      }
-    };
-
+    let rafId = 0;
+    const onScroll = () => { cancelAnimationFrame(rafId); rafId = requestAnimationFrame(tick); };
     tick(); // run once immediately on mount
-    updateProgress();
-    window.addEventListener("scroll", tick, { passive: true });
-    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", tick);
-      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <>
-      {/* Scroll progress bar — fixed, page-level */}
-      <div
-        ref={progressBar}
-        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[100] pointer-events-none"
-        style={{
-          background: "linear-gradient(90deg, #00D9FF, #B794F6)",
-          transform: "scaleX(0)",
-        }}
-      />
-
     <div
-      className="absolute top-0 left-0 w-full h-[500vh] pointer-events-none"
+      className="absolute top-0 left-0 w-full h-full pointer-events-none"
       style={{ zIndex: 30 }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -141,49 +90,6 @@ export default function Overlay() {
           </motion.div>
         </div>
 
-        {/* Section 2 — Building */}
-        <div
-          ref={s2}
-          className="absolute inset-0 flex flex-col items-start justify-center text-left px-8 md:px-32"
-          style={{ opacity: 0, willChange: "transform, opacity" }}
-        >
-          <motion.div style={{ x: px2, y: py2 }}>
-            <p className="text-[10px] font-mono tracking-[0.22em] text-white/55 uppercase mb-5">
-              ■ Building
-            </p>
-            <h2
-              className="text-4xl md:text-6xl font-black tracking-tight text-white mb-5 max-w-xl uppercase leading-[1.05]"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
-            >
-              <AnimatedText text="Building AI That Actually Ships." delay={0.2} />
-            </h2>
-            <p className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.15em] max-w-md leading-relaxed uppercase">
-              Seeking Working Student &amp; Internship roles in Data Science &amp; AI.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Section 3 — Specialising */}
-        <div
-          ref={s3}
-          className="absolute inset-0 flex flex-col items-start justify-center text-left px-8 md:px-32"
-          style={{ opacity: 0, willChange: "transform, opacity" }}
-        >
-          <motion.div style={{ x: px3, y: py3 }}>
-            <p className="text-[10px] font-mono tracking-[0.22em] text-white/55 uppercase mb-5">
-              ■ Specialising
-            </p>
-            <h2
-              className="text-4xl md:text-6xl font-black tracking-tight text-white mb-5 max-w-xl uppercase leading-[1.05]"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
-            >
-              <AnimatedText text="Machine Learning &amp; NLP." delay={0.2} />
-            </h2>
-            <p className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.15em] max-w-md leading-relaxed uppercase">
-              LLMs, RAG, and custom domains. If it doesn&apos;t ship, it&apos;s not done.
-            </p>
-          </motion.div>
-        </div>
 
       </div>
     </div>

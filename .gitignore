@@ -45,3 +45,7 @@ next-env.d.ts
 
 # Agent coordination files (runtime only, not for version control)
 .agent-reports/
+
+# E2E test scripts (dev artifacts)
+e2e_*.py
+*.py
