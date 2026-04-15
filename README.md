@@ -21,15 +21,6 @@ Personal portfolio website for Simarjit Singh, MSc Data Science student at GISMA
 - Contact form with email app picker (Gmail / Outlook / native mailto)
 - Fully responsive (mobile / tablet / desktop)
 
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
 ## Build
 
 ```bash
