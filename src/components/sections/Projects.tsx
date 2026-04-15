@@ -59,10 +59,16 @@ export default function Projects() {
 
       <div className="max-w-7xl mx-auto relative">
 
-        <div className="flex items-center justify-between border-t border-white/10 pt-5 mb-16">
+        <motion.div
+          className="flex items-center justify-between border-t border-white/10 pt-5 mb-16"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">■ Selected Works</span>
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{projects.length} Projects</span>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 items-start">
 

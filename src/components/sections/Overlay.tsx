@@ -70,6 +70,17 @@ export default function Overlay() {
       style={{ zIndex: 30 }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Film-grain texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+            opacity: 0.035,
+            mixBlendMode: "overlay",
+          }}
+        />
 
         {/* Section 1 — Hero */}
         <div
@@ -88,21 +99,27 @@ export default function Overlay() {
               Data Scientist · Berlin
             </p>
             <BerlinClock />
-            <div className="mt-8 pointer-events-auto">
-              <MagneticWrapper>
-                <button
-                  onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-300"
-                >
-                  View My Work
-                  <motion.span
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >↓</motion.span>
-                </button>
-              </MagneticWrapper>
-            </div>
           </motion.div>
+
+          {/* Floating scroll indicator — outside parallax, pinned to bottom */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-auto flex flex-col items-center gap-2">
+            <button
+              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+              className="flex flex-col items-center gap-2 text-white/30 hover:text-white/55 transition-colors duration-300 group"
+              aria-label="Scroll to About section"
+            >
+              <span className="font-mono text-[9px] tracking-[0.28em] uppercase">Scroll</span>
+              <div
+                className="w-5 h-8 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex items-start justify-center pt-1.5 overflow-hidden"
+              >
+                <motion.div
+                  animate={{ y: [0, 14, 0], opacity: [1, 0, 1] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1 h-1.5 rounded-full bg-white/50 group-hover:bg-[#00D9FF]/70 transition-colors duration-300"
+                />
+              </div>
+            </button>
+          </div>
         </div>
 
 

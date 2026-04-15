@@ -126,7 +126,7 @@ export default function Contact() {
                 className="relative w-28 h-28 sm:w-36 sm:h-36 lg:w-full lg:h-auto lg:aspect-square rounded-2xl overflow-hidden"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(0,217,255,0.12) 0%, rgba(183,148,246,0.12) 100%)",
+                    "linear-gradient(135deg, rgba(0,217,255,0.10) 0%, rgba(0,217,255,0.03) 100%)",
                   border: "1px solid rgba(0,217,255,0.2)",
                   boxShadow: "0 0 40px rgba(0,217,255,0.08)",
                 }}
@@ -145,7 +145,7 @@ export default function Contact() {
                   className="absolute bottom-0 left-0 right-0 h-[2px]"
                   style={{
                     background:
-                      "linear-gradient(90deg, #00D9FFcc, #B794F6cc)",
+                      "linear-gradient(90deg, #00D9FFcc, transparent)",
                   }}
                 />
               </div>
@@ -245,24 +245,6 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="rounded-2xl border border-white/[0.07] bg-white/[0.015] p-6 sm:p-8 space-y-5"
           >
-            {/* Form heading */}
-            <div className="mb-6">
-              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight">
-                <span
-                  style={{
-                    background: "linear-gradient(90deg, #ffffff 0%, #00D9FF 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  Get In Touch
-                </span>
-              </h3>
-              <p className="text-white/60 text-xs font-mono mt-1">
-                Fill in the details below and I&apos;ll get back to you.
-              </p>
-            </div>
-
             {/* Name + Role row (side by side on sm+) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
