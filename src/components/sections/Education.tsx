@@ -49,7 +49,7 @@ export default function Education() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">■ Education</span>
+          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Education</span>
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{education.length} Degrees</span>
         </motion.div>
 

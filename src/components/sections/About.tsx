@@ -104,17 +104,23 @@ export default function About() {
               ))}
             </motion.div>
 
-            {/* Tags */}
-            <motion.div variants={stagger} className="flex flex-wrap gap-2 pt-1">
-              {["ML Engineering", "GenAI / RAG", "Data Visualization", "Python", "NLP"].map((tag) => (
-                <motion.span
-                  key={tag}
-                  variants={fadeUp}
-                  className="text-[11px] font-mono px-3 py-1.5 rounded-full border border-[#00D9FF]/20 text-[#00D9FF]/70 bg-[#00D9FF]/[0.04] hover:border-[#00D9FF]/40 hover:text-[#00D9FF] transition-all duration-300"
-                >
-                  {tag}
-                </motion.span>
-              ))}
+            {/* Tools grid */}
+            <motion.div variants={fadeUp} className="pt-1">
+              <p className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/35 mb-3">Tools & Stack</p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Python", "PyTorch", "TensorFlow", "HuggingFace",
+                  "scikit-learn", "OpenCV", "FastAPI", "LangChain",
+                  "Docker", "AWS EC2", "SQL", "Power BI", "Plotly", "Pandas",
+                ].map((tool) => (
+                  <span
+                    key={tool}
+                    className="text-[11px] font-mono px-3 py-1.5 rounded-full border border-white/[0.08] text-white/50 bg-white/[0.03] hover:border-[#00D9FF]/30 hover:text-white/75 transition-all duration-300"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
 
