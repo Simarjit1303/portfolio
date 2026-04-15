@@ -89,8 +89,8 @@ export default function Education() {
                 </div>
                 <h4 className="text-xl font-black uppercase tracking-tight mb-3 leading-tight"
                   style={i === 0
-                    ? { background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }
-                    : { color: "rgba(255,255,255,0.85)" }
+                    ? { fontFamily: "var(--font-display)", background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }
+                    : { fontFamily: "var(--font-display)", color: "rgba(255,255,255,0.85)" }
                   }>
                   {edu.degree}
                 </h4>

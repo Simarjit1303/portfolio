@@ -3,8 +3,8 @@
 import { motion, Variants } from "framer-motion";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 const stagger: Variants = {
@@ -138,13 +138,13 @@ export default function Skills() {
               <ul className="space-y-3">
                 {certifications.map((cert, i) => (
                   <li key={i} className="flex items-start gap-3 leading-relaxed">
-                    <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-[#B794F6]/60" />
+                    <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-[#00D9FF]/60" />
                     <div className="flex items-center gap-2 flex-wrap min-w-0">
                       <a
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/55 text-xs font-mono hover:text-[#B794F6] transition-colors duration-200 leading-relaxed"
+                        className="text-white/55 text-xs font-mono hover:text-[#00D9FF] transition-colors duration-200 leading-relaxed"
                       >
                         {cert.name} ↗
                       </a>
