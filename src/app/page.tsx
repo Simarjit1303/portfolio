@@ -15,7 +15,7 @@ export default function Home() {
       <Scene />
       <NavPill />
       {/* Hero scroll section — z-index must be clearly above canvas (0) */}
-      <div id="intro" className="relative h-[500vh]" style={{ zIndex: 20 }}>
+      <div id="intro" className="relative h-[130vh]" style={{ zIndex: 20 }}>
         <Overlay />
       </div>
       {/* Content sections sit above canvas */}
@@ -30,7 +30,7 @@ export default function Home() {
           style={{ background: "#0d1117" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/20">
-              © 2025 Simarjit Singh
+              © 2026 Simarjit Singh
             </span>
             <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
               Berlin, Germany

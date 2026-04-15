@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-type Status = "project" | "recruiter" | "";
+type Status = "project" | "recruiter" | "other" | "";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -13,45 +13,78 @@ export default function Contact() {
     moreInfo: "",
   });
   const [sent, setSent] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showPicker, setShowPicker] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const sentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Modal: focus on open + Escape to close (merged — same dep, coupled concerns)
+  useEffect(() => {
+    if (!showPicker) return;
+    modalRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setShowPicker(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [showPicker]);
+
+  // Clear sent timer on unmount to avoid state update after unmount
+  useEffect(() => () => { if (sentTimer.current) clearTimeout(sentTimer.current); }, []);
+
+  const clearError = (field: string) => setErrors((p) => ({ ...p, [field]: "" }));
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.fullName.trim()) e.fullName = "Name is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
+    if (!form.status) e.status = "Please select one";
+    if (!form.moreInfo.trim()) e.moreInfo = "Message is required";
+    return e;
+  };
+
+  const buildEmailParts = () => {
+    // H-01: strip HTML chars before encoding — defense-in-depth against body injection
+    const san = (s: string) => s.replace(/[<>"']/g, "");
+    const subjectLabel =
+      form.status === "project" ? "Project Collaboration"
+      : form.status === "recruiter" ? "Recruiter Inquiry"
+      : "Just Connecting";
+    const subject = san(`[${subjectLabel}] — ${form.fullName}`);
+    const body = [
+      `Name  : ${san(form.fullName)}`,
+      form.role ? `Role  : ${san(form.role)}` : null,
+      `Email : ${san(form.email)}`,
+      ``,
+      san(form.moreInfo),
+    ].filter((l) => l !== null).join("\n");
+    return { subject, body };
+  };
+
+  const openEmail = (app: "gmail" | "outlook" | "default") => {
+    const { subject, body } = buildEmailParts();
+    const to = "simarjit1303@gmail.com";
+    const su = encodeURIComponent(subject);
+    const bd = encodeURIComponent(body);
+    if (app === "gmail") {
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${bd}`, "_blank", "noopener,noreferrer");
+    } else if (app === "outlook") {
+      window.open(`https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${su}&body=${bd}`, "_blank", "noopener,noreferrer");
+    } else {
+      // mailto: — opens native mail app (iOS Mail, Android, Mac Mail, Thunderbird, Outlook Desktop)
+      window.location.href = `mailto:${to}?subject=${su}&body=${bd}`;
+    }
+    setShowPicker(false);
+    setSent(true);
+    if (sentTimer.current) clearTimeout(sentTimer.current);
+    sentTimer.current = setTimeout(() => setSent(false), 4000);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const statusLabel =
-      form.status === "project"
-        ? "I have a project"
-        : form.status === "recruiter"
-        ? "I am a recruiter"
-        : "Not specified";
-
-    const subject = encodeURIComponent(
-      `[${statusLabel}] — ${form.fullName}`
-    );
-    const body = encodeURIComponent(
-      [
-        `━━━━━━━━━━━━━━━━━━━━━━━━`,
-        `  CONTACT FROM PORTFOLIO`,
-        `━━━━━━━━━━━━━━━━━━━━━━━━`,
-        ``,
-        `  Full Name : ${form.fullName}`,
-        `  Role      : ${form.role}`,
-        `  Email     : ${form.email}`,
-        `  Status    : ${statusLabel}`,
-        ``,
-        `━━━━━━━━━━━━━━━━━━━━━━━━`,
-        `  MESSAGE`,
-        `━━━━━━━━━━━━━━━━━━━━━━━━`,
-        ``,
-        form.moreInfo,
-        ``,
-        `━━━━━━━━━━━━━━━━━━━━━━━━`,
-      ].join("\n")
-    );
-    window.open(
-      `mailto:simarjit1303@gmail.com?subject=${subject}&body=${body}`,
-      "_blank"
-    );
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    const e2 = validate();
+    if (Object.keys(e2).length > 0) { setErrors(e2); return; }
+    setErrors({});
+    setShowPicker(true);
   };
 
   return (
@@ -159,21 +192,36 @@ export default function Contact() {
                     </svg>
                   ),
                 },
-              ].map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("mailto") ? "_self" : "_blank"}
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 text-white/65 hover:text-white/80 transition-colors duration-300 group"
-                >
-                  <span className="text-white/42 group-hover:text-[#00D9FF] transition-colors duration-300">
-                    {icon}
-                  </span>
-                  <span className="font-mono text-xs tracking-[0.15em] uppercase">{label}</span>
-                  <span className="text-white/42 text-xs ml-auto">↗</span>
-                </a>
-              ))}
+              ].map(({ label, href, icon }) =>
+                label === "Email" ? (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => setShowPicker(true)}
+                    className="inline-flex items-center gap-3 text-white/65 hover:text-white/80 transition-colors duration-300 group w-full text-left cursor-pointer"
+                  >
+                    <span className="text-white/42 group-hover:text-[#00D9FF] transition-colors duration-300">
+                      {icon}
+                    </span>
+                    <span className="font-mono text-xs tracking-[0.15em] uppercase">{label}</span>
+                    <span className="text-white/42 text-xs ml-auto">↗</span>
+                  </button>
+                ) : (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 text-white/65 hover:text-white/80 transition-colors duration-300 group"
+                  >
+                    <span className="text-white/42 group-hover:text-[#00D9FF] transition-colors duration-300">
+                      {icon}
+                    </span>
+                    <span className="font-mono text-xs tracking-[0.15em] uppercase">{label}</span>
+                    <span className="text-white/42 text-xs ml-auto">↗</span>
+                  </a>
+                )
+              )}
 
               {/* Availability badge */}
               <div
@@ -227,12 +275,12 @@ export default function Contact() {
                 <input
                   id="fullName"
                   type="text"
-                  required
                   placeholder="John Smith"
                   value={form.fullName}
-                  onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                  className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:border-[#00D9FF]/40 focus:bg-white/[0.05] transition-all duration-300"
+                  onChange={(e) => { setForm({ ...form, fullName: e.target.value }); clearError("fullName"); }}
+                  className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${errors.fullName ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
                 />
+                {errors.fullName && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.fullName}</p>}
               </div>
               <div className="space-y-1.5">
                 <label
@@ -263,24 +311,25 @@ export default function Contact() {
               <input
                 id="email"
                 type="email"
-                required
                 placeholder="you@example.com"
                 value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:border-[#00D9FF]/40 focus:bg-white/[0.05] transition-all duration-300"
+                onChange={(e) => { setForm({ ...form, email: e.target.value }); clearError("email"); }}
+                className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${errors.email ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
               />
+              {errors.email && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.email}</p>}
             </div>
 
-            {/* Status radio */}
-            <div className="space-y-2">
-              <p className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/55">
+            {/* Status radio — L-01: fieldset+legend for screen reader group context */}
+            <fieldset className="space-y-2 border-0 p-0 m-0">
+              <legend className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/55 mb-2">
                 I Am… *
-              </p>
+              </legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {(
                   [
                     { value: "project", label: "I Have a Project", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
                     { value: "recruiter", label: "I Am a Recruiter", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> },
+                    { value: "other", label: "Just Connecting", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
                   ] as { value: Status; label: string; icon: React.ReactNode }[]
                 ).map(({ value, label, icon }) => {
                   const active = form.status === value;
@@ -299,11 +348,12 @@ export default function Contact() {
                     >
                       <input
                         type="radio"
+                        id={`status-${value}`}
                         name="status"
                         value={value}
-                        required
                         checked={active}
-                        onChange={() => setForm({ ...form, status: value })}
+                        aria-describedby={errors.status ? "status-error" : undefined}
+                        onChange={() => { setForm({ ...form, status: value }); clearError("status"); }}
                         className="sr-only"
                       />
                       {/* custom radio dot */}
@@ -322,14 +372,20 @@ export default function Contact() {
                           <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF]" />
                         )}
                       </span>
-                      <span className="text-xs font-mono tracking-wide text-white/60">
-                        {icon} {label}
+                      <span className="text-xs font-mono tracking-wide text-white/60 flex items-center gap-1.5">
+                        <span aria-hidden="true">{icon}</span>
+                        {label}
                       </span>
                     </label>
                   );
                 })}
               </div>
-            </div>
+              {errors.status && (
+                <p id="status-error" role="alert" className="text-[10px] font-mono text-red-400/80 mt-1">
+                  {errors.status}
+                </p>
+              )}
+            </fieldset>
 
             {/* More info textarea */}
             <div className="space-y-1.5">
@@ -341,13 +397,13 @@ export default function Contact() {
               </label>
               <textarea
                 id="moreInfo"
-                required
                 rows={4}
                 placeholder="Tell me about your project, role, or what you have in mind…"
                 value={form.moreInfo}
-                onChange={(e) => setForm({ ...form, moreInfo: e.target.value })}
-                className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:border-[#00D9FF]/40 focus:bg-white/[0.05] transition-all duration-300 resize-none"
+                onChange={(e) => { setForm({ ...form, moreInfo: e.target.value }); clearError("moreInfo"); }}
+                className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-none ${errors.moreInfo ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
               />
+              {errors.moreInfo && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.moreInfo}</p>}
             </div>
 
             {/* Submit */}
@@ -362,12 +418,93 @@ export default function Contact() {
                 color: sent ? "#000" : "#00D9FF",
               }}
             >
-              {sent ? "✓ Opening Email Client…" : "Send Message ↗"}
+              {sent ? "↗ Open Your Email App to Send" : "Send Message ↗"}
             </button>
           </form>
 
         </div>
       </div>
+
+      {/* ── Email app picker modal ── */}
+      {showPicker && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
+          onClick={() => setShowPicker(false)}
+        >
+          <div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Choose your email app"
+            tabIndex={-1}
+            className="relative w-[min(90vw,360px)] rounded-2xl p-6 space-y-4 outline-none"
+            style={{ background: "#0d1117", border: "1px solid rgba(0,217,255,0.2)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-[10px] font-mono tracking-[0.22em] uppercase text-white/50 mb-1">
+              Open with
+            </p>
+            <h4 className="text-base font-black uppercase tracking-tight text-white">
+              Choose your email app
+            </h4>
+
+            <button
+              onClick={() => openEmail("gmail")}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
+              style={{ background: "rgba(234,67,53,0.08)", border: "1px solid rgba(234,67,53,0.25)" }}
+            >
+              {/* Gmail "M" icon */}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M2 6l10 7L22 6" stroke="#EA4335" strokeWidth="2" strokeLinecap="round"/>
+                <rect x="2" y="4" width="20" height="16" rx="2" stroke="#EA4335" strokeWidth="2"/>
+              </svg>
+              <span className="font-mono text-xs tracking-[0.15em] uppercase text-white/80">Gmail in Browser</span>
+              <span className="ml-auto text-white/30 text-xs">↗</span>
+            </button>
+
+            <button
+              onClick={() => openEmail("outlook")}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
+              style={{ background: "rgba(0,120,212,0.08)", border: "1px solid rgba(0,120,212,0.25)" }}
+            >
+              {/* Outlook envelope icon */}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="4" width="20" height="16" rx="2" stroke="#0078D4" strokeWidth="2"/>
+                <path d="M2 8l10 6 10-6" stroke="#0078D4" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+              <div className="text-left">
+                <span className="font-mono text-xs tracking-[0.15em] uppercase text-white/80 block">Outlook Web</span>
+                <span className="font-mono text-[9px] tracking-[0.1em] text-white/35">Requires Outlook.com sign-in</span>
+              </div>
+              <span className="ml-auto text-white/30 text-xs">↗</span>
+            </button>
+
+            <button
+              onClick={() => openEmail("default")}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <div className="text-left">
+                <span className="font-mono text-xs tracking-[0.15em] uppercase text-white/70 block">Default Mail App</span>
+                <span className="font-mono text-[9px] tracking-[0.1em] text-white/35">iOS Mail · Android · Mac Mail · Thunderbird</span>
+              </div>
+              <span className="ml-auto text-white/30 text-xs">↗</span>
+            </button>
+
+            <button
+              onClick={() => setShowPicker(false)}
+              className="w-full pt-1 text-[10px] font-mono tracking-[0.18em] uppercase text-white/30 hover:text-white/50 transition-colors duration-200 cursor-pointer"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
