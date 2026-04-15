@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Git worktrees
+.worktrees/
+
+# Agent coordination files (runtime only, not for version control)
+.agent-reports/
