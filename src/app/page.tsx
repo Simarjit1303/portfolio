@@ -1,5 +1,6 @@
 import { Scene, NavPill, Overlay } from "@/components/Dynamics";
 import ScrollReset from "@/components/ui/ScrollReset";
+import Cursor from "@/components/ui/Cursor";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
@@ -10,6 +11,7 @@ import Contact from "@/components/sections/Contact";
 export default function Home() {
   return (
     <main className="relative bg-black">
+      <Cursor />
       <ScrollReset />
       {/* Fixed 3D WebGL background — visible across the entire page */}
       <Scene />

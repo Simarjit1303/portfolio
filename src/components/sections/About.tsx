@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/animations";
 import { facts, stats } from "@/data/portfolio";
 import { useCountUp } from "@/hooks/useCountUp";
+import MagneticWrapper from "@/components/ui/MagneticWrapper";
 
 function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: string; delay?: number }) {
   // Parse digits separately from non-digits (e.g. "200+" -> [200, "+"], "5+" -> [5, "+"], "2+yrs" -> [2, "+yrs"])
@@ -21,7 +22,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
       style={{ backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", background: "rgba(10,10,16,0.55)" }}
     >
       <p className="text-2xl font-black text-white mb-1"
-        style={{ background: "linear-gradient(90deg, #00D9FF, #B794F6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+        style={{ background: "linear-gradient(90deg, #00D9FF, #ffffff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
         {match ? `${count}${suffix}` : numStr}
       </p>
       <p className="text-white/65 font-mono text-[10px] tracking-[0.15em] uppercase">{label}</p>
@@ -73,6 +74,7 @@ export default function About() {
             <motion.h3
               variants={fadeUp}
               className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-black uppercase tracking-tight leading-[1.05]"
+              style={{ fontFamily: "var(--font-display)" }}
             >
               <span style={{ background: "linear-gradient(90deg, #ffffff 0%, #00D9FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Data Scientist
@@ -146,14 +148,16 @@ export default function About() {
               </div>
             </div>
 
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="w-full flex items-center justify-center gap-2 text-[11px] font-mono tracking-widest uppercase px-5 py-4 rounded-xl border border-[#00D9FF]/30 text-[#00D9FF] bg-[#00D9FF]/[0.05] hover:bg-[#00D9FF]/[0.12] hover:border-[#00D9FF]/50 transition-all duration-300"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
-              Open To Opportunities — Get In Touch
-            </a>
+            <MagneticWrapper>
+              <a
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                className="w-full flex items-center justify-center gap-2 text-[11px] font-mono tracking-widest uppercase px-5 py-4 rounded-xl border border-[#00D9FF]/30 text-[#00D9FF] bg-[#00D9FF]/[0.05] hover:bg-[#00D9FF]/[0.12] hover:border-[#00D9FF]/50 transition-all duration-300"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
+                Open To Opportunities — Get In Touch
+              </a>
+            </MagneticWrapper>
           </motion.div>
 
         </div>
