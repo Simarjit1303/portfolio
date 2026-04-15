@@ -21,6 +21,7 @@ export default function Overlay() {
   const s1 = useRef<HTMLDivElement>(null);
   const s2 = useRef<HTMLDivElement>(null);
   const s3 = useRef<HTMLDivElement>(null);
+  const progressBar = useRef<HTMLDivElement>(null);
 
   // --- mouse parallax (Framer Motion is fine here, no scroll involved) -
   const rawX = useMotionValue(0);
@@ -84,12 +85,36 @@ export default function Overlay() {
       }
     };
 
+    const updateProgress = () => {
+      if (progressBar.current) {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = total > 0 ? Math.min(window.scrollY / total, 1) : 0;
+        progressBar.current.style.transform = `scaleX(${pct})`;
+      }
+    };
+
     tick(); // run once immediately on mount
+    updateProgress();
     window.addEventListener("scroll", tick, { passive: true });
-    return () => window.removeEventListener("scroll", tick);
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", tick);
+      window.removeEventListener("scroll", updateProgress);
+    };
   }, []);
 
   return (
+    <>
+      {/* Scroll progress bar — fixed, page-level */}
+      <div
+        ref={progressBar}
+        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[100] pointer-events-none"
+        style={{
+          background: "linear-gradient(90deg, #00D9FF, #B794F6)",
+          transform: "scaleX(0)",
+        }}
+      />
+
     <div
       className="absolute top-0 left-0 w-full h-[500vh] pointer-events-none"
       style={{ zIndex: 30 }}
@@ -162,5 +187,6 @@ export default function Overlay() {
 
       </div>
     </div>
+    </>
   );
 }
