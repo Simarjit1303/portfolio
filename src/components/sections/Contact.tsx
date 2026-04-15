@@ -106,7 +106,7 @@ export default function Contact() {
         {/* Header row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/10 pt-5 mb-12 md:mb-16 gap-2">
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">
-            ■ Get In Touch
+            Get In Touch
           </span>
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">
             Open To Opportunities
@@ -324,7 +324,7 @@ export default function Contact() {
               <legend className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/55 mb-2">
                 I Am… *
               </legend>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {(
                   [
                     { value: "project", label: "I Have a Project", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },

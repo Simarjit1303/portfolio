@@ -79,7 +79,7 @@ export default function Overlay() {
           <motion.div style={{ x: px1, y: py1 }}>
             <h1
               className="text-6xl md:text-8xl font-black tracking-tight text-white mb-3 uppercase leading-none"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
+              style={{ fontFamily: "var(--font-display)", textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
             >
               <ScrambleText text="SIMARJIT SINGH" />
             </h1>
@@ -87,6 +87,15 @@ export default function Overlay() {
               Data Scientist · Berlin
             </p>
             <BerlinClock />
+            <div className="mt-8 pointer-events-auto">
+              <button
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-mono text-[11px] tracking-[0.2em] uppercase transition-all duration-300"
+              >
+                View My Work
+                <span className="animate-bounce">↓</span>
+              </button>
+            </div>
           </motion.div>
         </div>
 
