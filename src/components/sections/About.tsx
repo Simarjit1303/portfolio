@@ -95,8 +95,7 @@ export default function About() {
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-white/65 text-base leading-relaxed">
-              Previously, I spent 2+ years at AISECT — first as a Python Intern, then as a Junior Data Analyst
-              and Python Instructor — training 50+ students and shipping analytics solutions across multiple ML pilot projects.
+              Before Berlin, I spent 2+ years at AISECT as a Data Analyst and Python Instructor — training 50+ students in Python and ML. Full story in Experience below.
             </motion.p>
 
             {/* Stats row */}
@@ -134,10 +133,19 @@ export default function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <div className="rounded-2xl border border-white/[0.07] p-6 mb-6"
-              style={{ backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", background: "rgba(10,10,16,0.65)" }}
+            <div className="rounded-2xl border p-6 mb-6"
+              style={{
+                borderColor: "rgba(0,217,255,0.18)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                background: "linear-gradient(135deg, rgba(0,217,255,0.04) 0%, rgba(10,10,16,0.72) 100%)",
+                boxShadow: "0 0 32px rgba(0,217,255,0.05)",
+              }}
             >
-              <h4 className="text-[10px] font-mono tracking-[0.2em] text-white/55 uppercase mb-5">Quick Facts</h4>
+              <h4 className="text-[10px] font-mono tracking-[0.2em] uppercase mb-5"
+                style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                Quick Facts
+              </h4>
               <div className="space-y-0">
                 {facts.map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-3.5 border-b border-white/[0.05] last:border-0">

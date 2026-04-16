@@ -28,14 +28,25 @@ export default function Home() {
         <Education />
         <Skills />
         <Contact />
-        <footer className="relative z-20 py-6 px-8 border-t border-white/[0.06]"
+        <footer className="relative z-20 pt-10 pb-8 px-8 border-t border-white/[0.06]"
           style={{ background: "#0d1117" }}>
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-            <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/20">
-              © 2026 Simarjit Singh
-            </span>
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+            <div>
+              <p
+                className="text-[clamp(1.8rem,4vw,3rem)] font-black uppercase tracking-tight leading-none"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  color: "rgba(255,255,255,0.07)",
+                }}
+              >
+                Simarjit Singh
+              </p>
+              <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/20 mt-2">
+                ML Engineer · GenAI · Berlin
+              </p>
+            </div>
             <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
-              Berlin, Germany
+              © 2026
             </span>
           </div>
         </footer>
