@@ -90,7 +90,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-24 overflow-hidden"
+      className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
         background:
           "linear-gradient(180deg, #121212 0%, #0d1117 50%, #121212 100%)",

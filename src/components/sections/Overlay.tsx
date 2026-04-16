@@ -69,7 +69,7 @@ export default function Overlay() {
       className="absolute top-0 left-0 w-full h-full pointer-events-none"
       style={{ zIndex: 30 }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
         {/* Film-grain texture overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-[1]"

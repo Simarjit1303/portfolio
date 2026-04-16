@@ -17,7 +17,7 @@ export default function Home() {
       <Scene />
       <NavPill />
       {/* Hero scroll section — z-index must be clearly above canvas (0) */}
-      <div id="intro" className="relative h-[130vh]" style={{ zIndex: 20 }}>
+      <div id="intro" className="relative h-[130dvh]" style={{ zIndex: 20 }}>
         <Overlay />
       </div>
       {/* Content sections sit above canvas */}
