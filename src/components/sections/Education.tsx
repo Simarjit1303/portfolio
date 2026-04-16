@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { fadeLeft } from "@/lib/animations";
 
 const cardVariant: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -33,7 +34,7 @@ export default function Education() {
 
   return (
     <section id="education" className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #121212 0%, #0d0d12 50%, #121212 100%)" }}
+      style={{ background: "linear-gradient(180deg, #121212 0%, #0e0c0a 50%, #121212 100%)" }}
     >
       {/* Decorative background number */}
       <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
@@ -50,7 +51,7 @@ export default function Education() {
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Education</span>
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{education.length} Degrees</span>
+          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Academic Background</span>
         </motion.div>
 
         <motion.div
@@ -63,8 +64,12 @@ export default function Education() {
           {education.map((edu, i) => (
             <motion.div
               key={i}
-              variants={cardVariant}
-              className="group relative p-8 rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.01]"
+              variants={fadeLeft}
+              className={`group relative p-8 rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.025] ${
+                i === 0
+                  ? "hover:shadow-[0_0_40px_rgba(0,217,255,0.10)]"
+                  : "hover:shadow-[0_8px_30px_rgba(255,184,0,0.06)]"
+              }`}
               style={{
                 background: i === 0
                   ? "linear-gradient(135deg, rgba(0,217,255,0.04) 0%, rgba(0,217,255,0.01) 100%)"

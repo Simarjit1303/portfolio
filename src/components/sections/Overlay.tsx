@@ -89,20 +89,39 @@ export default function Overlay() {
           style={{ willChange: "transform, opacity" }}
         >
           <motion.div style={{ x: px1, y: py1 }}>
-            <h1
+            <motion.h1
               className="text-6xl md:text-8xl font-black tracking-tight text-white mb-3 uppercase leading-none"
               style={{ fontFamily: "var(--font-display)", textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
             >
               <ScrambleText text="SIMARJIT SINGH" />
-            </h1>
-            <p className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.22em] uppercase">
-              Data Scientist · Berlin
-            </p>
-            <BerlinClock />
+            </motion.h1>
+            <motion.p
+              className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.22em] uppercase"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.45 }}
+            >
+              ML Engineer · GenAI · Berlin
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.7 }}
+            >
+              <BerlinClock />
+            </motion.div>
           </motion.div>
 
-          {/* Floating scroll indicator — outside parallax, pinned to bottom */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-auto flex flex-col items-center gap-2">
+          {/* Floating scroll indicator — right-aligned, delayed entry */}
+          <motion.div
+            className="absolute bottom-10 right-8 pointer-events-auto flex flex-col items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.0 }}
+          >
             <button
               onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
               className="flex flex-col items-center gap-2 text-white/30 hover:text-white/55 transition-colors duration-300 group"
@@ -113,13 +132,13 @@ export default function Overlay() {
                 className="w-5 h-8 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex items-start justify-center pt-1.5 overflow-hidden"
               >
                 <motion.div
-                  animate={{ y: [0, 14, 0], opacity: [1, 0, 1] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, 14], opacity: [1, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeIn", repeatDelay: 0.4 }}
                   className="w-1 h-1.5 rounded-full bg-white/50 group-hover:bg-[#00D9FF]/70 transition-colors duration-300"
                 />
               </div>
             </button>
-          </div>
+          </motion.div>
         </div>
 
 

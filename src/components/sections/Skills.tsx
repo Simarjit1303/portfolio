@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { skillCategories, certifications, currentlyLearning, languages } from "@/data/portfolio";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -13,36 +14,6 @@ const stagger: Variants = {
 };
 
 export default function Skills() {
-  const categories = [
-    { name: "Programming",           accent: "#00D9FF", skills: "Python, SQL, R, C++, Google BigQuery, DAX" },
-    { name: "AI & Machine Learning", accent: "#B794F6", skills: "Pandas, NumPy, Scikit-learn, TensorFlow, Keras, PyTorch, HuggingFace Transformers, OpenCV, XGBoost, NLP, Text Classification, ANN, CNN, RNN" },
-    { name: "LLMs & Generative AI",  accent: "#00D9FF", skills: "OpenAI API, LangChain, LlamaIndex, RAG Architecture, Streamlit, FastAPI" },
-    { name: "Cloud & DevOps",        accent: "#B794F6", skills: "AWS EC2, Google Cloud, Docker, Linux, Git, CI/CD, GitHub Actions, Cloudflare, Nginx" },
-    { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Time-series analysis, Data validation, Hyperparameter tuning, Cross-validation" },
-    { name: "Business Intelligence", accent: "#B794F6", skills: "Power BI, Tableau, Matplotlib, Seaborn, Plotly, Excel, Google Sheets" },
-    { name: "Databases",             accent: "#00D9FF", skills: "MySQL, SQLite, MongoDB, BigQuery" },
-  ];
-
-  const certifications = [
-    { name: "Google AI Essentials",                               url: "https://www.coursera.org/account/accomplishments/specialization/HOM2AMDIQHE4" },
-    { name: "Google AI",                                          url: "https://www.coursera.org/account/accomplishments/professional-cert/LUSNVR4VN7UW" },
-    { name: "Google Gen AI Leader",                               url: "https://www.skills.google/public_profiles/814efbb9-3247-4f4f-b9bc-bcfbc646c2a9" },
-    { name: "Google Prompting Essentials",                        url: "https://www.coursera.org/account/accomplishments/specialization/ZBMF3YY1VWOU" },
-    { name: "Google Data Analytics",                              url: "https://www.coursera.org/account/accomplishments/professional-cert/U5LCGZHJT634" },
-    { name: "100 Days of Code: The Complete Python Pro Bootcamp", url: "https://ude.my/UC-87e954c7-f3f1-47fc-b0d0-64b556c801d5" },
-    { name: "Google Advanced Data Analytics",                     url: "https://www.coursera.org/professional-certificates/google-advanced-data-analytics", pending: true },
-    { name: "Google Cloud Data Analytics",                        url: "https://www.coursera.org/professional-certificates/google-cloud-data-analytics-certificate", pending: true },
-    { name: "Data Analyst in Power BI",                           url: "https://app.datacamp.com/learn/career-tracks/data-analyst-in-power-bi", pending: true },
-  ];
-
-  const currentlyLearning = [
-    "LangChain & LlamaIndex",
-    "Vector Databases (ChromaDB, Pinecone)",
-    "MLflow & Experiment Tracking",
-    "GitHub Actions & CI/CD",
-    "Power BI (DataCamp Professional Path)",
-    "Google Cloud Data Analytics",
-  ];
 
   return (
     <section id="skills" className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
@@ -54,8 +25,8 @@ export default function Skills() {
       <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
         style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }} />
 
-      {/* Decorative background number */}
-      <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
+      {/* Decorative background number — bottom-left to break repetition */}
+      <div className="absolute bottom-4 left-4 text-[220px] font-black text-white/[0.018] leading-none select-none pointer-events-none">
         05
       </div>
 
@@ -69,13 +40,17 @@ export default function Skills() {
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Skills & Certifications</span>
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{categories.length} Categories</span>
+          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{skillCategories.length} Categories</span>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
 
           {/* Tech Stack */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 relative">
+            {/* Vertical accent line — grid-breaking detail */}
+            <div className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
+              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(0,217,255,0.25) 30%, rgba(0,217,255,0.25) 70%, transparent 100%)" }} />
+            <div className="lg:pl-6">
             <motion.h4
               className="text-xs font-mono tracking-[0.2em] uppercase mb-8"
               style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
@@ -93,12 +68,18 @@ export default function Skills() {
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
             >
-              {categories.map((cat, i) => (
+              {skillCategories.map((cat, i) => (
                 <motion.div key={i} variants={fadeUp} className="group">
-                  <h5 className="text-[10px] font-mono uppercase tracking-[0.18em] mb-3"
-                    style={{ color: cat.accent, opacity: 0.7 }}>
-                    {cat.name}
-                  </h5>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div
+                      className="h-px w-0 group-hover:w-5 transition-all duration-300 rounded-full shrink-0"
+                      style={{ backgroundColor: cat.accent }}
+                    />
+                    <h5 className="text-[10px] font-mono uppercase tracking-[0.18em]"
+                      style={{ color: cat.accent, opacity: 0.7 }}>
+                      {cat.name}
+                    </h5>
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {cat.skills.split(", ").map((skill, j) => (
                       <span
@@ -114,6 +95,7 @@ export default function Skills() {
                 </motion.div>
               ))}
             </motion.div>
+            </div>
           </div>
 
           {/* Right column */}
@@ -187,12 +169,7 @@ export default function Skills() {
             >
               <h4 className="text-xs font-mono tracking-[0.2em] text-white/55 uppercase mb-5">Languages</h4>
               <div className="space-y-0">
-                {[
-                  { lang: "English", badge: "C1", sub: "Professional" },
-                  { lang: "German",  badge: "A2", sub: "B1 In Progress" },
-                  { lang: "Hindi",   badge: null, sub: "Native" },
-                  { lang: "Punjabi", badge: null, sub: "Native" },
-                ].map(({ lang, badge, sub }) => (
+                {languages.map(({ lang, badge, sub }) => (
                   <div key={lang} className="flex items-center justify-between py-3.5 border-b border-white/[0.05] last:border-0">
                     <span className="text-white/75 font-mono text-xs">{lang}</span>
                     <div className="flex items-center gap-2">
