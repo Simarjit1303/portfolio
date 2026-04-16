@@ -1,12 +1,19 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/data/portfolio";
 
 export default function Projects() {
   const [hovered, setHovered] = useState<number | null>(null);
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // On mobile (no hover), default to first project so panel is never empty
+  useEffect(() => {
+    if (window.matchMedia("(hover: none)").matches) {
+      setHovered(0);
+    }
+  }, []);
 
   const handleEnter = (i: number) => {
     if (leaveTimer.current) clearTimeout(leaveTimer.current);
@@ -77,14 +84,15 @@ export default function Projects() {
             style={{ backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", background: "rgba(10,10,16,0.82)" }}
           >
             {projects.map((p, i) => (
-              <motion.a
+              <motion.div
                 key={p.num}
-                href={p.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between py-6 border-b border-white/[0.08] transition-all duration-300 relative overflow-hidden block"
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${p.title} details`}
+                className="group flex items-center justify-between py-6 border-b border-white/[0.08] transition-all duration-300 relative overflow-hidden cursor-pointer"
                 onMouseEnter={() => handleEnter(i)}
                 onClick={() => setHovered(hovered === i ? null : i)}
+                onKeyDown={(e) => e.key === "Enter" && setHovered(hovered === i ? null : i)}
                 onMouseLeave={handleLeave}
                 animate={{
                   backgroundColor: hovered === i ? `${p.color}08` : "rgba(0,0,0,0)",
@@ -125,18 +133,20 @@ export default function Projects() {
 
                 <div className="flex items-center gap-4 pr-2">
                   <span className="text-[11px] font-mono text-white/42 hidden md:block">{p.year}</span>
-                  <motion.span
-                    className="text-sm font-mono"
-                    animate={{
-                      color: hovered === i ? p.color : "rgba(255,255,255,0.2)",
-                      x: hovered === i ? 0 : -4,
-                    }}
-                    transition={{ duration: 0.2 }}
+                  {/* GitHub link — direct access without needing preview panel */}
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${p.title} on GitHub`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-sm font-mono transition-colors duration-200"
+                    style={{ color: hovered === i ? p.color : "rgba(255,255,255,0.2)" }}
                   >
                     ↗
-                  </motion.span>
+                  </a>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </div>
 
@@ -217,7 +227,7 @@ export default function Projects() {
                     Select a project
                   </p>
                   <p aria-hidden="true" className="text-white/28 font-mono text-[10px] tracking-[0.15em] uppercase mt-1">
-                    hover or tap to explore
+                    tap to explore
                   </p>
                 </motion.div>
               )}
