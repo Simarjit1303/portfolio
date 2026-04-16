@@ -23,6 +23,12 @@ body, html {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
   overflow-x: hidden;
+  cursor: none;
+}
+
+/* Restore cursor on touch/mobile where custom cursor is hidden */
+@media (hover: none) {
+  body, html { cursor: auto; }
 }
 
 /* Globally nuke all scrollbars but retain native scroll physics */
