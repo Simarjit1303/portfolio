@@ -85,12 +85,12 @@ export default function Overlay() {
         {/* Section 1 — Hero */}
         <div
           ref={s1}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-8"
           style={{ willChange: "transform, opacity" }}
         >
           <motion.div style={{ x: px1, y: py1 }}>
             <motion.h1
-              className="text-6xl md:text-8xl font-black tracking-tight text-white mb-3 uppercase leading-none"
+              className="text-[clamp(1.8rem,8.5vw,6rem)] font-black tracking-tight text-white mb-3 uppercase leading-none w-full"
               style={{ fontFamily: "var(--font-display)", textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6)" }}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function Overlay() {
               <ScrambleText text="SIMARJIT SINGH" />
             </motion.h1>
             <motion.p
-              className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.22em] uppercase"
+              className="text-[11px] md:text-xs text-white/65 font-mono tracking-[0.12em] sm:tracking-[0.22em] uppercase"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.45 }}
@@ -117,7 +117,7 @@ export default function Overlay() {
 
           {/* Floating scroll indicator — right-aligned, delayed entry */}
           <motion.div
-            className="absolute bottom-10 right-8 pointer-events-auto flex flex-col items-center gap-2"
+            className="absolute bottom-8 right-4 sm:right-8 pointer-events-auto flex flex-col items-center gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.0 }}
