@@ -104,7 +104,7 @@ export default function Overlay() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.45 }}
             >
-              ML Engineer · GenAI · Berlin
+              Data Scientist · GenAI · Berlin
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
