@@ -42,7 +42,7 @@ export default function Home() {
                 Simarjit Singh
               </p>
               <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/20 mt-2">
-                ML Engineer · GenAI · Berlin
+                Data Scientist · GenAI · Berlin
               </p>
             </div>
             <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
