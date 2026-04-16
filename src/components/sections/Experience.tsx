@@ -8,7 +8,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 overflow-hidden px-8 md:px-24"
+      className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 overflow-hidden px-8 md:px-24"
     >
       {/* Decorative background number */}
       <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">

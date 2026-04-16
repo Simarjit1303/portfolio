@@ -33,7 +33,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative z-20 min-h-screen flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
+      className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
       style={{ background: "transparent" }}
     >
       {/* Top / bottom fade for smooth transitions */}
