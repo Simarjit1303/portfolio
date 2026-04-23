@@ -33,7 +33,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
 export default function About() {
   return (
     <section id="about" className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
-      style={{ background: "transparent" }}
+      style={{ background: "rgba(18,18,18,0.88)" }}
     >
       {/* Top fade */}
       <div className="absolute inset-x-0 top-0 h-48 pointer-events-none"
