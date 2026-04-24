@@ -1,33 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Syne } from "next/font/google";
+import { Exo_2, Outfit, Space_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "optional",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-code",
   subsets: ["latin"],
+  weight: ["400", "700"],
   display: "optional",
 });
 
-const syne = Syne({
+const exo2 = Exo_2({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["700", "800", "900"],
   display: "optional",
 });
 
 export const metadata: Metadata = {
   title: "Simarjit Singh | Data Scientist & AI Engineer — Berlin",
-  description: "Portfolio of Simarjit Singh — MSc Data Science & AI, Berlin. Building end-to-end ML pipelines, GenAI apps, and data products. Open to internship & working student roles.",
+  description: "Portfolio of Simarjit Singh — MSc Data Science & AI, Berlin. Building end-to-end ML pipelines, GenAI apps, and data products. Open to full-time roles.",
   openGraph: {
     title: "Simarjit Singh | Data Scientist & AI Engineer",
-    description: "ML pipelines, GenAI applications, and data products. Open to internship and working student roles in Berlin.",
+    description: "ML pipelines, GenAI applications, and data products. Open to full-time roles in Berlin.",
     siteName: "Simarjit Singh Portfolio",
     locale: "en_US",
     type: "website",
@@ -61,7 +62,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} h-full antialiased [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
+      className={`${outfit.variable} ${spaceMono.variable} ${exo2.variable} h-full antialiased [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
     >
       <head>
         {/* Pre-fetch the 3D robot model as early as possible to cut LCP */}
