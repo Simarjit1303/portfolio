@@ -13,6 +13,16 @@ const stagger: Variants = {
   show: { transition: { staggerChildren: 0.07 } },
 };
 
+const pillVariant: Variants = {
+  hidden: { opacity: 0, scale: 0.8, y: 8 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+const pillStagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.035, delayChildren: 0.12 } },
+};
+
 export default function Skills() {
 
   return (
@@ -80,18 +90,19 @@ export default function Skills() {
                       {cat.name}
                     </h5>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <motion.div className="flex flex-wrap gap-2" variants={pillStagger}>
                     {cat.skills.split(", ").map((skill, j) => (
-                      <span
+                      <motion.span
                         key={j}
+                        variants={pillVariant}
                         className="text-xs text-white/65 bg-white/[0.04] border border-white/[0.07] rounded-full px-3.5 py-1.5 transition-all duration-300 font-mono hover:text-white"
                         onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.accent}40`)}
                         onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
                       >
                         {skill}
-                      </span>
+                      </motion.span>
                     ))}
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </motion.div>
