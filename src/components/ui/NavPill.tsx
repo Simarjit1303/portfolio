@@ -45,11 +45,15 @@ export default function NavPill() {
   const [playClick] = useSound("/sfx/click.mp3", { volume: 0.5 });
 
   const handleInteraction = (id: string) => {
-    playClick();
+    try { playClick(); } catch {}
     if (id === "contact") {
-       window.dispatchEvent(new Event("robotWave"));
+      window.dispatchEvent(new Event("robotWave"));
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (
