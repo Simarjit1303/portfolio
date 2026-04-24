@@ -2,7 +2,7 @@ export const facts = [
   { label: "Based In",   value: "Berlin, Germany" },
   { label: "University", value: "GISMA — Potsdam" },
   { label: "Degree",     value: "MSc Data Science & AI" },
-  { label: "Available",  value: "Internship / Working Student" },
+  { label: "Available",  value: "Full-Time Roles" },
 ];
 
 export const stats = [

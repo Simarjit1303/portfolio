@@ -2,6 +2,7 @@ import { Scene, NavPill, Overlay } from "@/components/Dynamics";
 import ScrollReset from "@/components/ui/ScrollReset";
 import Cursor from "@/components/ui/Cursor";
 import About from "@/components/sections/About";
+import MarqueeTicker from "@/components/ui/MarqueeTicker";
 import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
@@ -10,7 +11,7 @@ import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="relative bg-black">
+    <main className="relative bg-[#121212]">
       <Cursor />
       <ScrollReset />
       {/* Fixed 3D WebGL background — visible across the entire page */}
@@ -23,6 +24,7 @@ export default function Home() {
       {/* Content sections sit above canvas */}
       <div style={{ position: "relative", zIndex: 20 }}>
         <About />
+        <MarqueeTicker />
         <Projects />
         <Experience />
         <Education />

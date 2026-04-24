@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, stagger } from "@/lib/animations";
+import { fadeUp, stagger, revealUp } from "@/lib/animations";
 import { facts, stats } from "@/data/portfolio";
 import { useCountUp } from "@/hooks/useCountUp";
 import MagneticWrapper from "@/components/ui/MagneticWrapper";
@@ -72,7 +72,7 @@ export default function About() {
             viewport={{ once: true, margin: "-80px" }}
           >
             <motion.h3
-              variants={fadeUp}
+              variants={revealUp}
               className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-black uppercase tracking-tight leading-[1.05]"
               style={{ fontFamily: "var(--font-display)" }}
             >
