@@ -262,7 +262,7 @@ export default function Contact() {
                   onChange={(e) => { setForm({ ...form, fullName: e.target.value }); clearError("fullName"); }}
                   className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${errors.fullName ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
                 />
-                {errors.fullName && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.fullName}</p>}
+                {errors.fullName && <p role="alert" className="text-[10px] font-mono text-red-400/80 mt-1">{errors.fullName}</p>}
               </div>
               <div className="space-y-1.5">
                 <label
@@ -298,7 +298,7 @@ export default function Contact() {
                 onChange={(e) => { setForm({ ...form, email: e.target.value }); clearError("email"); }}
                 className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 ${errors.email ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
               />
-              {errors.email && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.email}</p>}
+              {errors.email && <p role="alert" className="text-[10px] font-mono text-red-400/80 mt-1">{errors.email}</p>}
             </div>
 
             {/* Status radio — L-01: fieldset+legend for screen reader group context */}
@@ -385,7 +385,7 @@ export default function Contact() {
                 onChange={(e) => { setForm({ ...form, moreInfo: e.target.value }); clearError("moreInfo"); }}
                 className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-none ${errors.moreInfo ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
               />
-              {errors.moreInfo && <p className="text-[10px] font-mono text-red-400/80 mt-1">{errors.moreInfo}</p>}
+              {errors.moreInfo && <p role="alert" className="text-[10px] font-mono text-red-400/80 mt-1">{errors.moreInfo}</p>}
             </div>
 
             {/* Submit */}

@@ -20,6 +20,8 @@ Personal portfolio website for Simarjit Singh, MSc Data Science student at GISMA
 - Projects, Experience, Education, Skills, Contact sections
 - Contact form with email app picker (Gmail / Outlook / native mailto)
 - Fully responsive (mobile / tablet / desktop)
+- OG image (`/public/og-image.png`) for LinkedIn/Twitter social cards
+- ARIA labels on canvas, loader, and error states for screen reader support
 
 ## Build
 

@@ -9,7 +9,7 @@ export default function Scene() {
   const [modelLoaded, setModelLoaded] = useState(false);
 
   return (
-    <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: "none" }}>
+    <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: "none" }} aria-label="Interactive 3D robot animation">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
         dpr={[1, 2]}
@@ -38,6 +38,8 @@ export default function Scene() {
 
       {/* Loader disappears the moment the GLB finishes loading, not on a timer */}
       <div
+        role="status"
+        aria-label="Loading 3D experience"
         className="fixed inset-0 flex items-center justify-center bg-[#0d1117]"
         style={{
           zIndex: 50,
