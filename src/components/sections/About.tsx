@@ -95,7 +95,7 @@ export default function About() {
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-white/65 text-base leading-relaxed">
-              Before Berlin, I spent 2+ years at AISECT as a Data Analyst and Python Instructor — training 50+ students in Python and ML. Full story in Experience below.
+              Before Berlin, I spent 2+ years at AISECT as a Data Analyst and Python Instructor — trained 50+ students in Python and ML. Full story in Experience below.
             </motion.p>
 
             {/* Stats row */}
