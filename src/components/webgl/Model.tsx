@@ -20,6 +20,8 @@ export default function Model({ onLoad }: { onLoad?: () => void }) {
     // Start idle skeletal animation
     if (actions["Idle"]) {
       actions["Idle"].reset().fadeIn(0.5).play();
+    } else {
+      console.warn("Model: 'Idle' animation not found in robot.glb — check GLB export");
     }
 
     // Wave event trigger

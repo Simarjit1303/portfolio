@@ -28,11 +28,20 @@ export const metadata: Metadata = {
     siteName: "Simarjit Singh Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://simarjit.de/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Simarjit Singh — Data Scientist & AI Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Simarjit Singh | Data Scientist & AI Engineer",
     description: "ML pipelines, GenAI apps, data products. Open to Berlin roles.",
+    images: ["https://simarjit.de/og-image.png"],
   },
   other: {
     "darkreader-lock": "",
