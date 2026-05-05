@@ -106,7 +106,7 @@ export const currentlyLearning = [
 
 export const languages = [
   { lang: "English", badge: "C1",   sub: "Professional" },
-  { lang: "German",  badge: "A2",   sub: "B1 In Progress" },
+  { lang: "German",  badge: "B1",   sub: "Continuous Learning" },
   { lang: "Hindi",   badge: null,   sub: "Native" },
   { lang: "Punjabi", badge: null,   sub: "Native" },
 ];
