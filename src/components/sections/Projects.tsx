@@ -1,34 +1,125 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/data/portfolio";
 
+const CATEGORIES = ["All", "ML & AI", "Data Analysis", "Computer Vision"] as const;
+type Category = (typeof CATEGORIES)[number];
+
+const categoryMap: Record<string, Category> = {
+  "GenAI Application":    "ML & AI",
+  "NLP Classification":   "ML & AI",
+  "ML Pipeline":          "ML & AI",
+  "Predictive Modelling": "ML & AI",
+  "Statistical Modelling":"Data Analysis",
+  "Data Analysis":        "Data Analysis",
+  "Data Visualization":   "Data Analysis",
+  "Computer Vision":      "Computer Vision",
+};
+
+function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.25, delay: index * 0.04, ease: "easeOut" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="rounded-2xl border p-6 flex flex-col"
+      style={{
+        background: hovered
+          ? `linear-gradient(135deg, ${p.color}06 0%, rgba(10,10,16,0.97) 100%)`
+          : "rgba(10,10,16,0.82)",
+        borderColor: hovered ? `${p.color}40` : "rgba(255,255,255,0.07)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+        transition: "background 0.3s, border-color 0.3s, transform 0.3s",
+      }}
+    >
+      {/* Top accent bar */}
+      <div
+        className="h-[2px] w-10 rounded-full mb-5"
+        style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}
+      />
+
+      {/* Num + year */}
+      <div className="flex items-center justify-between mb-3">
+        <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color: `${p.color}99` }}>
+          {p.num}
+        </span>
+        <span className="font-mono text-[10px] text-white/30 tracking-[0.15em]">{p.year}</span>
+      </div>
+
+      {/* Title */}
+      <h3
+        className="text-lg font-black uppercase tracking-tight leading-tight mb-1 transition-colors duration-300"
+        style={{ color: hovered ? "#ffffff" : "rgba(255,255,255,0.85)" }}
+      >
+        {p.title}
+      </h3>
+
+      {/* Type label */}
+      <p
+        className="font-mono text-[10px] tracking-[0.15em] uppercase mb-4 transition-colors duration-300"
+        style={{ color: hovered ? `${p.color}cc` : "rgba(255,255,255,0.28)" }}
+      >
+        {p.type}
+      </p>
+
+      {/* Description — clamped to 3 lines */}
+      <p className="text-white/55 text-sm leading-relaxed line-clamp-3 mb-5 flex-1">
+        {p.desc}
+      </p>
+
+      {/* Tech tags */}
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {p.techs.map((t) => (
+          <span
+            key={t}
+            className="text-[10px] font-mono px-2 py-0.5 rounded-full border"
+            style={{
+              color: `${p.color}bb`,
+              borderColor: `${p.color}28`,
+              background: `${p.color}08`,
+            }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* GitHub link */}
+      <a
+        href={p.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-[11px] font-mono tracking-widest uppercase transition-colors duration-200 self-start"
+        style={{ color: hovered ? p.color : "rgba(255,255,255,0.25)" }}
+      >
+        View on GitHub ↗
+      </a>
+    </motion.div>
+  );
+}
+
 export default function Projects() {
-  const [hovered, setHovered] = useState<number | null>(null);
-  const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [activeFilter, setActiveFilter] = useState<Category>("All");
 
-  // On mobile (no hover), default to first project so panel is never empty
-  useEffect(() => {
-    if (window.matchMedia("(hover: none)").matches) {
-      setHovered(0);
-    }
-  }, []);
+  const filtered =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((p) => categoryMap[p.type] === activeFilter);
 
-  const handleEnter = (i: number) => {
-    if (leaveTimer.current) clearTimeout(leaveTimer.current);
-    setHovered(i);
-  };
-
-  const handleLeave = () => {
-    leaveTimer.current = setTimeout(() => setHovered(null), 120);
-  };
-
-  const cancelLeave = () => {
-    if (leaveTimer.current) clearTimeout(leaveTimer.current);
-  };
-
-  const active = hovered !== null ? projects[hovered] : null;
+  const countFor = (cat: Category) =>
+    cat === "All"
+      ? projects.length
+      : projects.filter((p) => categoryMap[p.type] === cat).length;
 
   return (
     <section
@@ -36,36 +127,24 @@ export default function Projects() {
       className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
       style={{ background: "rgba(18,18,18,0.88)" }}
     >
-      {/* Top / bottom fade for smooth transitions */}
-      <div className="absolute inset-x-0 top-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }} />
-      <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }} />
-
-      {/* Full-section background reacts to hovered row */}
-      <AnimatePresence mode="wait">
-        {active && (
-          <motion.div
-            key={active.num}
-            className="absolute inset-0 pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            style={{
-              background: `radial-gradient(ellipse 80% 60% at 60% 50%, ${active.color}0e 0%, transparent 70%)`,
-            }}
-          />
-        )}
-      </AnimatePresence>
+      {/* Top / bottom fades */}
+      <div
+        className="absolute inset-x-0 top-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }}
+      />
+      <div
+        className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }}
+      />
 
       {/* Decorative background number */}
       <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
         02
       </div>
 
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative w-full">
 
+        {/* Section header */}
         <motion.div
           className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
           initial={{ opacity: 0, y: 16 }}
@@ -77,164 +156,45 @@ export default function Projects() {
           <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{projects.length} Projects</span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 items-start">
-
-          {/* Left — project list */}
-          <div className="lg:col-span-3 border-t border-white/[0.08] rounded-2xl overflow-hidden"
-            style={{ backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", background: "rgba(10,10,16,0.82)" }}
-          >
-            {projects.map((p, i) => (
-              <motion.div
-                key={p.num}
-                role="button"
-                tabIndex={0}
-                aria-label={`View ${p.title} details`}
-                className="group flex items-center justify-between py-6 border-b border-white/[0.08] transition-all duration-300 relative overflow-hidden cursor-pointer"
-                onMouseEnter={() => handleEnter(i)}
-                onClick={() => setHovered(hovered === i ? null : i)}
-                onKeyDown={(e) => e.key === "Enter" && setHovered(hovered === i ? null : i)}
-                onMouseLeave={handleLeave}
-                animate={{
-                  backgroundColor: hovered === i ? `${p.color}08` : "rgba(0,0,0,0)",
-                }}
-                transition={{ duration: 0.2 }}
+        {/* Filter tabs */}
+        <motion.div
+          className="flex flex-wrap gap-2 mb-8"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+        >
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className="text-[11px] font-mono tracking-[0.15em] uppercase px-4 py-2 rounded-full border transition-all duration-300"
+              style={{
+                borderColor: activeFilter === cat ? "#00D9FF50" : "rgba(255,255,255,0.10)",
+                color: activeFilter === cat ? "#00D9FF" : "rgba(255,255,255,0.40)",
+                background: activeFilter === cat ? "rgba(0,217,255,0.07)" : "rgba(255,255,255,0.02)",
+              }}
+            >
+              {cat}
+              <span
+                className="ml-1.5 text-[9px]"
+                style={{ opacity: activeFilter === cat ? 0.7 : 0.4 }}
               >
-                {/* Left accent bar on hover */}
-                <motion.div
-                  className="absolute left-0 top-0 bottom-0 w-[2px]"
-                  animate={{ opacity: hovered === i ? 1 : 0, scaleY: hovered === i ? 1 : 0 }}
-                  style={{ backgroundColor: p.color, originY: 0.5 }}
-                  transition={{ duration: 0.2 }}
-                />
+                {countFor(cat)}
+              </span>
+            </button>
+          ))}
+        </motion.div>
 
-                <div className="flex items-center gap-6 pl-4">
-                  <span
-                    aria-hidden="true"
-                    className="text-[11px] font-mono tracking-[0.2em] transition-colors duration-300"
-                    style={{ color: hovered === i ? p.color : "rgba(255,255,255,0.2)" }}
-                  >
-                    {p.num}
-                  </span>
-                  <div>
-                    <p
-                      className="text-lg md:text-xl font-black uppercase tracking-tight leading-tight transition-colors duration-300"
-                      style={{ color: hovered === i ? "#ffffff" : "rgba(255,255,255,0.75)" }}
-                    >
-                      {p.title}
-                    </p>
-                    <p
-                      className="text-[11px] font-mono tracking-[0.15em] uppercase mt-0.5 transition-colors duration-300"
-                      style={{ color: hovered === i ? `${p.color}cc` : "rgba(255,255,255,0.25)" }}
-                    >
-                      {p.type}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 pr-2">
-                  <span className="text-[11px] font-mono text-white/42 hidden md:block">{p.year}</span>
-                  {/* GitHub link — direct access without needing preview panel */}
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open ${p.title} on GitHub`}
-                    onClick={(e) => e.stopPropagation()}
-                    className="text-sm font-mono transition-colors duration-200"
-                    style={{ color: hovered === i ? p.color : "rgba(255,255,255,0.2)" }}
-                  >
-                    ↗
-                  </a>
-                </div>
-              </motion.div>
+        {/* Project grid */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p, i) => (
+              <ProjectCard key={p.num} p={p} index={i} />
             ))}
-          </div>
+          </AnimatePresence>
+        </motion.div>
 
-          {/* Right — project preview panel */}
-          <div className="lg:col-span-2 lg:pl-16 pt-8 lg:pt-0 lg:sticky lg:top-32"
-            onMouseEnter={cancelLeave}
-            onMouseLeave={handleLeave}
-          >
-            <AnimatePresence mode="wait">
-              {active ? (
-                <motion.div
-                  key={active.num}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                >
-                  <div
-                    className="rounded-2xl border p-7"
-                    style={{
-                      borderColor: `${active.color}40`,
-                      background: `linear-gradient(135deg, rgba(10,10,16,0.97) 0%, rgba(14,14,22,0.97) 100%)`,
-                      backdropFilter: "blur(20px)",
-                      WebkitBackdropFilter: "blur(20px)",
-                      boxShadow: `0 0 40px ${active.color}10`,
-                    }}
-                  >
-                    {/* Top stripe */}
-                    <div
-                      className="h-[2px] w-16 rounded-full mb-6"
-                      style={{ background: `linear-gradient(90deg, ${active.color}, transparent)` }}
-                    />
-                    <p
-                      className="text-[10px] font-mono tracking-[0.2em] uppercase mb-3"
-                      style={{ color: `${active.color}99` }}
-                    >
-                      {active.num} — {active.type}
-                    </p>
-                    <h4 className="text-2xl font-black uppercase tracking-tight text-white mb-4 leading-tight">
-                      {active.title}
-                    </h4>
-                    <p className="text-white/55 text-sm leading-relaxed mb-6">
-                      {active.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {active.techs.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[10px] font-mono px-2.5 py-1 rounded-full border"
-                          style={{ color: `${active.color}cc`, borderColor: `${active.color}30`, background: `${active.color}08` }}
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={active.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-[11px] font-mono tracking-widest uppercase transition-colors duration-200"
-                      style={{ color: active.color }}
-                    >
-                      View on GitHub ↗
-                    </a>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="empty"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-2xl border border-white/[0.08] p-7 flex flex-col items-start justify-center min-h-[220px]"
-                  style={{ background: "rgba(10,10,16,0.97)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
-                >
-                  <p aria-hidden="true" className="text-white/42 font-mono text-[11px] tracking-[0.2em] uppercase">
-                    Select a project
-                  </p>
-                  <p aria-hidden="true" className="text-white/28 font-mono text-[10px] tracking-[0.15em] uppercase mt-1">
-                    tap to explore
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-        </div>
       </div>
     </section>
   );
