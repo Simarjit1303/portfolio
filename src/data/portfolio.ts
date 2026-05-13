@@ -86,13 +86,13 @@ export const skillCategories = [
 ];
 
 export const certifications = [
+  { name: "Mayerfeld Practicum Program",                        url: "https://credsverse.com/credentials/a039efd3-ecf5-4a8a-87f4-844d4c245ac2" },
   { name: "Google AI Essentials",                               url: "https://www.coursera.org/account/accomplishments/specialization/HOM2AMDIQHE4" },
   { name: "Google AI",                                          url: "https://www.coursera.org/account/accomplishments/professional-cert/LUSNVR4VN7UW" },
   { name: "Google Gen AI Leader",                               url: "https://www.skills.google/public_profiles/814efbb9-3247-4f4f-b9bc-bcfbc646c2a9" },
   { name: "Google Prompting Essentials",                        url: "https://www.coursera.org/account/accomplishments/specialization/ZBMF3YY1VWOU" },
   { name: "Google Data Analytics",                              url: "https://www.coursera.org/account/accomplishments/professional-cert/U5LCGZHJT634" },
   { name: "100 Days of Code: The Complete Python Pro Bootcamp", url: "https://ude.my/UC-87e954c7-f3f1-47fc-b0d0-64b556c801d5" },
-  { name: "Mayerfeld Practicum Program",                        url: "https://credsverse.com/credentials/a039efd3-ecf5-4a8a-87f4-844d4c245ac2" },
   { name: "Google Advanced Data Analytics",                     url: "https://www.coursera.org/professional-certificates/google-advanced-data-analytics",        pending: true },
   { name: "Google Cloud Data Analytics",                        url: "https://www.coursera.org/professional-certificates/google-cloud-data-analytics-certificate", pending: true },
   { name: "Data Analyst in Power BI",                           url: "https://app.datacamp.com/learn/career-tracks/data-analyst-in-power-bi",                    pending: true },
