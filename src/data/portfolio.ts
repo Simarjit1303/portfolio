@@ -112,7 +112,7 @@ export const skillCategories = [
   { name: "Cloud & DevOps",        accent: "#FFB800", skills: "AWS EC2, Google Cloud, Docker, Linux, Git, CI/CD, GitHub Actions, Cloudflare, Nginx" },
   { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Statistical Hypothesis Testing, Time-series analysis, Data validation, Hyperparameter tuning, Cross-validation" },
   { name: "Business Intelligence", accent: "#FFB800", skills: "Power BI, Tableau, Matplotlib, Seaborn, Plotly, Excel, Google Sheets" },
-  { name: "Databases",             accent: "#00D9FF", skills: "MySQL, SQLite, MongoDB, BigQuery" },
+  { name: "Databases",             accent: "#00D9FF", skills: "MySQL, PostgreSQL, SQLite, MongoDB, BigQuery" },
 ];
 
 export const certifications = [
