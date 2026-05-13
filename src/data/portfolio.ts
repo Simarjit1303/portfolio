@@ -7,7 +7,7 @@ export const facts = [
 
 export const stats = [
   { num: "200+",  label: "Students Trained" },
-  { num: "5+",    label: "ML Projects Shipped" },
+  { num: "9",     label: "Projects Shipped" },
   { num: "2+yrs", label: "Industry Experience" },
   { num: "10",    label: "Certifications" },
 ];
@@ -107,10 +107,10 @@ export const projects = [
 
 export const skillCategories = [
   { name: "Programming",           accent: "#00D9FF", skills: "Python, SQL, R, C++, Google BigQuery, DAX" },
-  { name: "AI & Machine Learning", accent: "#FFB800", skills: "Pandas, NumPy, Scikit-learn, TensorFlow, Keras, PyTorch, HuggingFace Transformers, OpenCV, XGBoost, NLP, Text Classification, ANN, CNN, RNN" },
+  { name: "AI & Machine Learning", accent: "#FFB800", skills: "Pandas, NumPy, Scikit-learn, SciPy, Statsmodels, TensorFlow, Keras, PyTorch, HuggingFace Transformers, OpenCV, XGBoost, NLP, TF-IDF, Text Classification, ANN, CNN, RNN" },
   { name: "LLMs & Generative AI",  accent: "#00D9FF", skills: "OpenAI API, LangChain, LlamaIndex, RAG Architecture, Streamlit, FastAPI" },
   { name: "Cloud & DevOps",        accent: "#FFB800", skills: "AWS EC2, Google Cloud, Docker, Linux, Git, CI/CD, GitHub Actions, Cloudflare, Nginx" },
-  { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Time-series analysis, Data validation, Hyperparameter tuning, Cross-validation" },
+  { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Statistical Hypothesis Testing, Time-series analysis, Data validation, Hyperparameter tuning, Cross-validation" },
   { name: "Business Intelligence", accent: "#FFB800", skills: "Power BI, Tableau, Matplotlib, Seaborn, Plotly, Excel, Google Sheets" },
   { name: "Databases",             accent: "#00D9FF", skills: "MySQL, SQLite, MongoDB, BigQuery" },
 ];
