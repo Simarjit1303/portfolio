@@ -111,8 +111,8 @@ export default function About() {
               <div className="flex flex-wrap gap-2">
                 {[
                   "Python", "PyTorch", "TensorFlow", "HuggingFace",
-                  "scikit-learn", "SciPy", "OpenCV", "FastAPI", "LangChain",
-                  "Docker", "AWS EC2", "SQL", "Power BI", "Plotly", "Pandas", "Seaborn",
+                  "scikit-learn", "SciPy", "Statsmodels", "OpenCV", "FastAPI", "LangChain",
+                  "Docker", "AWS EC2", "SQL", "Power BI", "Plotly", "Pandas", "NumPy", "Seaborn",
                 ].map((tool) => (
                   <span
                     key={tool}
