@@ -73,6 +73,16 @@ export const projects = [
     color: "#00D9FF",
     github: "https://github.com/Simarjit1303/Projects/blob/main/Data%20Analytics/European%20Enivironment%20Agency%20Fossil%20Fuel%20Subsidy/EEA_Fossil_Fuel_Subsidy.ipynb",
   },
+  {
+    num: "07",
+    title: "LCF Household Expenditure",
+    type: "Statistical Modelling",
+    year: "2025",
+    techs: ["Python", "WLS", "Statsmodels", "SciPy", "Pandas"],
+    desc: "Weighted least squares regression on UK Living Costs & Food Survey 2013 (~4,000 households) — models household expenditure against occupational class, tenure type, and household composition using survey weights and HC3 robust standard errors. Validated across 9 robustness appendices.",
+    color: "#B794F6",
+    github: "https://github.com/Simarjit1303/lcf-household-expenditure",
+  },
 ];
 
 export const skillCategories = [
