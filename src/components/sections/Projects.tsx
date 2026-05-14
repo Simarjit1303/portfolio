@@ -52,7 +52,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
       />
 
       {/* Thumbnail */}
-      <div className="w-full h-32 rounded-lg mb-4 overflow-hidden">
+      <div className="w-full h-44 rounded-lg mb-4 overflow-hidden">
         <Image
           src={`/thumbnails/${p.num}.svg`}
           alt={p.title}
