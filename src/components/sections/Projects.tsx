@@ -70,22 +70,6 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
         <span className="font-mono text-[10px] text-white/30 tracking-[0.15em]">{p.year}</span>
       </div>
 
-      {/* Title */}
-      <h3
-        className="text-lg font-black uppercase tracking-tight leading-tight mb-1 transition-colors duration-300"
-        style={{ color: hovered ? "#ffffff" : "rgba(255,255,255,0.85)" }}
-      >
-        {p.title}
-      </h3>
-
-      {/* Type label */}
-      <p
-        className="font-mono text-[10px] tracking-[0.15em] uppercase mb-4 transition-colors duration-300"
-        style={{ color: hovered ? `${p.color}cc` : "rgba(255,255,255,0.28)" }}
-      >
-        {p.type}
-      </p>
-
       {/* Description — clamped to 3 lines */}
       <p className="text-white/55 text-sm leading-relaxed line-clamp-3 mb-5 flex-1">
         {p.desc}
