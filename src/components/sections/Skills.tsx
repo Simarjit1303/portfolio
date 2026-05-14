@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/animations";
-import { skillCategories, certifications, currentlyLearning, languages } from "@/data/portfolio";
+import { skillCategories, certifications, languages } from "@/data/portfolio";
 import { SectionWrapper, SectionHeader, GlassCard } from "@/components/ui/primitives";
 
 const pillVariant: Variants = {
@@ -120,24 +120,6 @@ export default function Skills() {
                         </span>
                       )}
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </GlassCard>
-          </motion.div>
-
-          {/* Currently Learning */}
-          <motion.div variants={fadeUp}>
-            <GlassCard accentColor="#00D9FF">
-              <h4 suppressHydrationWarning className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
-                style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Currently Learning
-              </h4>
-              <ul className="space-y-3">
-                {currentlyLearning.map((item, i) => (
-                  <li key={i} className="text-white/55 text-xs flex items-start gap-3 leading-relaxed font-mono hover:text-white/80 transition-colors duration-200">
-                    <span className="text-[#00D9FF]/60 mt-0.5 shrink-0 text-[10px]">→</span>
-                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
