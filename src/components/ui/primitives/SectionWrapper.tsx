@@ -12,14 +12,15 @@ export function SectionWrapper({ id, children, className = "", decorativeNumber 
   return (
     <section
       id={id}
+      suppressHydrationWarning
       className={`relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden ${className}`}
       style={{ background: "rgba(18,18,18,0.88)" }}
     >
       {/* Top fade */}
-      <div className="absolute inset-x-0 top-0 h-48 pointer-events-none"
+      <div suppressHydrationWarning className="absolute inset-x-0 top-0 h-48 pointer-events-none"
         style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }} />
       {/* Bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+      <div suppressHydrationWarning className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
         style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }} />
       {/* Decorative background number */}
       {decorativeNumber && (

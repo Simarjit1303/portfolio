@@ -21,6 +21,7 @@ export default function Experience() {
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
+              suppressHydrationWarning
               variants={cardVariant}
               className="group rounded-2xl border border-white/[0.08] p-7 hover:border-white/[0.18] transition-all duration-500"
               style={{
