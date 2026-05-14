@@ -20,7 +20,7 @@ export default function Home() {
       <div id="intro" className="relative h-[130dvh]" style={{ zIndex: 20 }}>
         <Overlay />
         {/* Bottom fade blends hero into About with no hard seam */}
-        <div className="absolute inset-x-0 bottom-0 h-64 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent 0%, #121212 100%)", zIndex: 31 }} />
+        <div suppressHydrationWarning className="absolute inset-x-0 bottom-0 h-64 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent 0%, #121212 100%)", zIndex: 31 }} />
       </div>
       {/* Content sections sit above canvas */}
       <div style={{ position: "relative", zIndex: 20 }}>
@@ -30,7 +30,7 @@ export default function Home() {
         <Education />
         <Skills />
         <Contact />
-        <footer className="relative z-20 pt-10 pb-8 px-8 border-t border-white/[0.06]"
+        <footer suppressHydrationWarning className="relative z-20 pt-10 pb-8 px-8 border-t border-white/[0.06]"
           style={{ background: "#0d1117" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
             <div>

@@ -20,6 +20,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
     <motion.div
       ref={elementRef}
       variants={fadeUp}
+      suppressHydrationWarning
       className="p-4 rounded-xl border border-white/[0.07] hover:border-[#00D9FF]/20 transition-all duration-300"
       style={{ backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", background: "rgba(10,10,16,0.55)" }}
     >
@@ -104,6 +105,7 @@ export default function About() {
 
         {/* Right — quick facts */}
         <motion.div
+          suppressHydrationWarning
           className="lg:col-span-2"
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}

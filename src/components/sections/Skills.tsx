@@ -35,6 +35,7 @@ export default function Skills() {
             style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(0,217,255,0.25) 30%, rgba(0,217,255,0.25) 70%, transparent 100%)" }} />
           <div className="lg:pl-6">
           <motion.h4
+            suppressHydrationWarning
             className="text-xs font-mono tracking-[0.2em] uppercase mb-8"
             style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
             initial={{ opacity: 0, y: 16 }}
@@ -67,6 +68,7 @@ export default function Skills() {
                   {cat.skills.split(", ").map((skill, j) => (
                     <motion.span
                       key={j}
+                      suppressHydrationWarning
                       variants={pillVariant}
                       className="text-xs text-white/65 bg-white/[0.04] border border-white/[0.07] rounded-full px-3.5 py-1.5 transition-all duration-300 font-mono hover:text-white"
                       onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.accent}40`)}
