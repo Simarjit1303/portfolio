@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import { fadeLeft } from "@/lib/animations";
+import { SectionWrapper, SectionHeader, GlassCard } from "@/components/ui/primitives";
 
 const cardVariant: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -33,49 +34,31 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #121212 0%, #0e0c0a 50%, #121212 100%)" }}
-    >
-      {/* Decorative background number */}
-      <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
-        04
-      </div>
+    <SectionWrapper id="education" decorativeNumber="04">
 
-      <div className="max-w-7xl mx-auto relative">
+      <SectionHeader label="Education" right="Academic Background" />
 
-        <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Education</span>
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Academic Background</span>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          {education.map((edu, i) => (
-            <motion.div
-              key={i}
-              variants={fadeLeft}
-              className={`group relative p-8 rounded-2xl border overflow-hidden transition-all duration-500 hover:scale-[1.025] ${
-                i === 0
-                  ? "hover:shadow-[0_0_40px_rgba(0,217,255,0.10)]"
-                  : "hover:shadow-[0_8px_30px_rgba(255,184,0,0.06)]"
-              }`}
-              style={{
-                background: i === 0
-                  ? "linear-gradient(135deg, rgba(0,217,255,0.04) 0%, rgba(0,217,255,0.01) 100%)"
-                  : "rgba(255,255,255,0.015)",
-                borderColor: i === 0 ? "rgba(0,217,255,0.18)" : "rgba(255,255,255,0.07)",
-              }}
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        variants={stagger}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        {education.map((edu, i) => (
+          <motion.div
+            key={i}
+            variants={fadeLeft}
+            className={`group transition-all duration-500 hover:scale-[1.025] ${
+              i === 0
+                ? "hover:shadow-[0_0_40px_rgba(0,217,255,0.10)]"
+                : "hover:shadow-[0_8px_30px_rgba(255,184,0,0.06)]"
+            }`}
+          >
+            <GlassCard
+              accentColor={i === 0 ? "#00D9FF" : undefined}
+              className="relative overflow-hidden h-full p-8"
+              style={i !== 0 ? { background: "rgba(255,255,255,0.015)", borderColor: "rgba(255,255,255,0.07)" } : undefined}
             >
               {i === 0 && (
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -102,10 +85,10 @@ export default function Education() {
                 <p className="text-white/60 text-sm mb-1">{edu.institution}</p>
                 <p className="text-white/55 font-mono text-[11px] tracking-wider uppercase">{edu.location}</p>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+            </GlassCard>
+          </motion.div>
+        ))}
+      </motion.div>
+    </SectionWrapper>
   );
 }

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #121212;
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    /* ── Top accent line ── */
+    .accent-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #00D9FF;
+      z-index: 10;
+    }
+
+    /* ── Bottom accent line ── */
+    .accent-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 217, 255, 0.30);
+      z-index: 10;
+    }
+
+    /* ── Grid dot texture ── */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(0, 217, 255, 0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    /* ── Radial glow — left bleed ── */
+    .glow-left {
+      position: absolute;
+      top: -120px;
+      left: -120px;
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.07) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    /* ── Radial glow — right bleed ── */
+    .glow-right {
+      position: absolute;
+      top: 60px;
+      right: -60px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+      z-index: 1;
+    }
+
+    /* ── Diagonal stripe overlay ── */
+    .stripe-overlay {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 60px,
+        rgba(0, 217, 255, 0.015) 60px,
+        rgba(0, 217, 255, 0.015) 61px
+      );
+      z-index: 1;
+    }
+
+    /* ── Main layout ── */
+    .container {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      display: flex;
+      align-items: stretch;
+      z-index: 5;
+    }
+
+    /* ── Left content block ── */
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 72px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      color: #00D9FF;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0.85;
+    }
+
+    .name {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 0.92;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .name .first {
+      display: block;
+      color: #FFFFFF;
+    }
+
+    .name .last {
+      display: block;
+      color: #FFFFFF;
+    }
+
+    .subtitle {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.01em;
+      margin-bottom: 36px;
+      line-height: 1.4;
+    }
+
+    .subtitle .accent {
+      color: #00D9FF;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #00D9FF, transparent);
+      margin-bottom: 36px;
+    }
+
+    .meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+    }
+
+    .meta .dot {
+      color: #00D9FF;
+      opacity: 0.6;
+      margin: 0 8px;
+    }
+
+    /* ── Right decorative panel ── */
+    .right {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Vertical separator line */
+    .right::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.3) 30%, rgba(0, 217, 255, 0.3) 70%, transparent);
+    }
+
+    /* ── SS Monogram ── */
+    .monogram-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Outer ring */
+    .ring-outer {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.15);
+    }
+
+    /* Middle ring */
+    .ring-mid {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 255, 0.25);
+    }
+
+    /* Inner ring */
+    .ring-inner {
+      position: absolute;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 217, 255, 0.4);
+      background: rgba(0, 217, 255, 0.03);
+    }
+
+    /* Monogram text */
+    .monogram {
+      position: relative;
+      z-index: 2;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 76px;
+      font-weight: 900;
+      color: transparent;
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.9) 0%, rgba(0, 217, 255, 0.3) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    /* Decorative tick marks around ring */
+    .tick {
+      position: absolute;
+      background: rgba(0, 217, 255, 0.5);
+    }
+
+    .tick-top    { top: -1px;    left: 50%;   transform: translateX(-50%); width: 1px; height: 10px; }
+    .tick-right  { right: -1px;  top:  50%;   transform: translateY(-50%); width: 10px; height: 1px; }
+    .tick-bottom { bottom: -1px; left: 50%;   transform: translateX(-50%); width: 1px; height: 10px; }
+    .tick-left   { left: -1px;   top:  50%;   transform: translateY(-50%); width: 10px; height: 1px; }
+
+    /* Data points — small floating squares */
+    .data-point {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00D9FF;
+      border-radius: 1px;
+      opacity: 0.6;
+    }
+
+    .dp1 { top: 72px;  right: 72px; }
+    .dp2 { top: 120px; right: 44px; opacity: 0.35; }
+    .dp3 { bottom: 88px; right: 80px; opacity: 0.5; }
+    .dp4 { bottom: 52px; right: 120px; opacity: 0.25; }
+    .dp5 { top: 56px;  right: 160px; opacity: 0.3; width: 3px; height: 3px; }
+
+    /* Horizontal scan lines inside right panel */
+    .scan-line {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: rgba(0, 217, 255, 0.06);
+    }
+
+    .scan-line:nth-child(1) { top: 90px; }
+    .scan-line:nth-child(2) { top: 180px; }
+    .scan-line:nth-child(3) { top: 270px; }
+    .scan-line:nth-child(4) { top: 360px; }
+    .scan-line:nth-child(5) { top: 450px; }
+    .scan-line:nth-child(6) { top: 540px; }
+  </style>
+</head>
+<body>
+
+  <!-- Texture layers -->
+  <div class="accent-top"></div>
+  <div class="accent-bottom"></div>
+  <div class="grid-bg"></div>
+  <div class="glow-left"></div>
+  <div class="glow-right"></div>
+  <div class="stripe-overlay"></div>
+
+  <!-- Main layout -->
+  <div class="container">
+
+    <!-- Left: identity -->
+    <div class="left">
+      <div class="tag">// portfolio · 2025</div>
+
+      <div class="name">
+        <span class="first">SIMARJIT</span>
+        <span class="last">SINGH</span>
+      </div>
+
+      <div class="subtitle">
+        <span class="accent">Data Scientist</span> &amp;
+        <br>AI Engineer
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="meta">
+        Berlin, Germany
+        <span class="dot">·</span>
+        MSc Data Science
+        <br>
+        GISMA University of Applied Sciences
+      </div>
+    </div>
+
+    <!-- Right: monogram decoration -->
+    <div class="right">
+      <!-- Scan lines -->
+      <div class="scan-line"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line"></div>
+      <div class="scan-line"></div>
+
+      <!-- Floating data points -->
+      <div class="data-point dp1"></div>
+      <div class="data-point dp2"></div>
+      <div class="data-point dp3"></div>
+      <div class="data-point dp4"></div>
+      <div class="data-point dp5"></div>
+
+      <!-- SS Monogram with rings -->
+      <div class="monogram-wrap">
+        <div class="ring-outer">
+          <div class="tick tick-top"></div>
+          <div class="tick tick-right"></div>
+          <div class="tick tick-bottom"></div>
+          <div class="tick tick-left"></div>
+        </div>
+        <div class="ring-mid"></div>
+        <div class="ring-inner"></div>
+        <div class="monogram">SS</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <radialGradient id="glow-03" cx="20%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FF6B6B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-03" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="2" height="2" rx="1" fill="#FF6B6B" opacity="0.08"/>
+    </pattern>
+    <style>
+      .title-03 { font-family: 'Exo 2', system-ui, sans-serif; font-weight: 900; }
+      .mono-03  { font-family: 'Space Mono', 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <rect width="800" height="500" fill="#0a0a10"/>
+  <rect width="800" height="500" fill="url(#glow-03)"/>
+  <rect width="800" height="500" fill="url(#grid-03)"/>
+  <rect y="0" width="800" height="4" fill="#FF6B6B"/>
+
+  <text x="760" y="470" class="mono-03" font-size="140" fill="#FF6B6B" opacity="0.04"
+        text-anchor="end" dominant-baseline="auto">03</text>
+
+  <text x="48" y="80" class="mono-03" font-size="11" fill="#FF6B6B" letter-spacing="3">NLP CLASSIFICATION</text>
+
+  <text x="48" y="148" class="title-03" font-size="52" fill="#ffffff" font-weight="900" letter-spacing="-1">FAKE NEWS</text>
+  <text x="48" y="204" class="title-03" font-size="52" fill="#FF6B6B" font-weight="900" letter-spacing="-1">DETECTION</text>
+
+  <line x1="48" y1="225" x2="420" y2="225" stroke="#FF6B6B" stroke-width="1" stroke-opacity="0.2"/>
+
+  <g class="mono-03" font-size="11">
+    <rect x="48" y="400" width="68" height="26" rx="13" fill="#FF6B6B" fill-opacity="0.08" stroke="#FF6B6B" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="82" y="418" fill="#FF6B6B" fill-opacity="0.8" text-anchor="middle">Python</text>
+
+    <rect x="124" y="400" width="58" height="26" rx="13" fill="#FF6B6B" fill-opacity="0.08" stroke="#FF6B6B" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="153" y="418" fill="#FF6B6B" fill-opacity="0.8" text-anchor="middle">TF-IDF</text>
+
+    <rect x="190" y="400" width="88" height="26" rx="13" fill="#FF6B6B" fill-opacity="0.08" stroke="#FF6B6B" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="234" y="418" fill="#FF6B6B" fill-opacity="0.8" text-anchor="middle">scikit-learn</text>
+
+    <rect x="286" y="400" width="88" height="26" rx="13" fill="#FF6B6B" fill-opacity="0.08" stroke="#FF6B6B" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="330" y="418" fill="#FF6B6B" fill-opacity="0.8" text-anchor="middle">TensorFlow</text>
+  </g>
+
+  <line x1="48" y1="460" x2="200" y2="460" stroke="#FF6B6B" stroke-width="1" stroke-opacity="0.15"/>
+</svg>

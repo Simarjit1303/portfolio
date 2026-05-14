@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import ScrambleText from "@/components/ui/ScrambleText";
 import BerlinClock from "@/components/ui/BerlinClock";
 import MagneticWrapper from "@/components/ui/MagneticWrapper";
+import { scrollToSection } from "@/lib/viewTransitions";
 
 
 // ---- pure math helpers (no deps) ------------------------------------
@@ -123,7 +124,7 @@ export default function Overlay() {
             transition={{ duration: 1, delay: 1.0 }}
           >
             <button
-              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => scrollToSection("about")}
               className="flex flex-col items-center gap-2 text-white/30 hover:text-white/55 transition-colors duration-300 group"
               aria-label="Scroll to About section"
             >

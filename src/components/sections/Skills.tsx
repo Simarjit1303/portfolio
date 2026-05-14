@@ -1,17 +1,9 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { fadeUp, stagger } from "@/lib/animations";
 import { skillCategories, certifications, currentlyLearning, languages } from "@/data/portfolio";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
-};
-
-const stagger: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07 } },
-};
+import { SectionWrapper, SectionHeader, GlassCard } from "@/components/ui/primitives";
 
 const pillVariant: Variants = {
   hidden: { opacity: 0, scale: 0.8, y: 8 },
@@ -26,104 +18,82 @@ const pillStagger: Variants = {
 export default function Skills() {
 
   return (
-    <section id="skills" className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
-      style={{ background: "rgba(18,18,18,0.88)" }}
-    >
-      {/* Top / bottom fades */}
-      <div className="absolute inset-x-0 top-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }} />
-      <div className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }} />
-
+    <SectionWrapper id="skills">
       {/* Decorative background number — bottom-left to break repetition */}
       <div className="absolute bottom-4 left-4 text-[220px] font-black text-white/[0.018] leading-none select-none pointer-events-none">
         05
       </div>
 
-      <div className="max-w-7xl mx-auto relative">
+      <SectionHeader label="Skills & Certifications" right={`${skillCategories.length} Categories`} />
 
-        <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Skills & Certifications</span>
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{skillCategories.length} Categories</span>
-        </motion.div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-
-          {/* Tech Stack */}
-          <div className="lg:col-span-2 relative">
-            {/* Vertical accent line — grid-breaking detail */}
-            <div className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
-              style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(0,217,255,0.25) 30%, rgba(0,217,255,0.25) 70%, transparent 100%)" }} />
-            <div className="lg:pl-6">
-            <motion.h4
-              className="text-xs font-mono tracking-[0.2em] uppercase mb-8"
-              style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              Technical Stack
-            </motion.h4>
-            <motion.div
-              className="space-y-7"
-              variants={stagger}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-            >
-              {skillCategories.map((cat, i) => (
-                <motion.div key={i} variants={fadeUp} className="group">
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <div
-                      className="h-px w-0 group-hover:w-5 transition-all duration-300 rounded-full shrink-0"
-                      style={{ backgroundColor: cat.accent }}
-                    />
-                    <h5 className="text-[10px] font-mono uppercase tracking-[0.18em]"
-                      style={{ color: cat.accent, opacity: 0.7 }}>
-                      {cat.name}
-                    </h5>
-                  </div>
-                  <motion.div className="flex flex-wrap gap-2" variants={pillStagger}>
-                    {cat.skills.split(", ").map((skill, j) => (
-                      <motion.span
-                        key={j}
-                        variants={pillVariant}
-                        className="text-xs text-white/65 bg-white/[0.04] border border-white/[0.07] rounded-full px-3.5 py-1.5 transition-all duration-300 font-mono hover:text-white"
-                        onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.accent}40`)}
-                        onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </motion.div>
-                </motion.div>
-              ))}
-            </motion.div>
-            </div>
-          </div>
-
-          {/* Right column */}
+        {/* Tech Stack */}
+        <div className="lg:col-span-2 relative">
+          {/* Vertical accent line — grid-breaking detail */}
+          <div className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
+            style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(0,217,255,0.25) 30%, rgba(0,217,255,0.25) 70%, transparent 100%)" }} />
+          <div className="lg:pl-6">
+          <motion.h4
+            className="text-xs font-mono tracking-[0.2em] uppercase mb-8"
+            style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            Technical Stack
+          </motion.h4>
           <motion.div
-            className="space-y-12"
+            className="space-y-7"
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
           >
+            {skillCategories.map((cat, i) => (
+              <motion.div key={i} variants={fadeUp} className="group">
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div
+                    className="h-px w-0 group-hover:w-5 transition-all duration-300 rounded-full shrink-0"
+                    style={{ backgroundColor: cat.accent }}
+                  />
+                  <h5 className="text-[10px] font-mono uppercase tracking-[0.18em]"
+                    style={{ color: cat.accent, opacity: 0.7 }}>
+                    {cat.name}
+                  </h5>
+                </div>
+                <motion.div className="flex flex-wrap gap-2" variants={pillStagger}>
+                  {cat.skills.split(", ").map((skill, j) => (
+                    <motion.span
+                      key={j}
+                      variants={pillVariant}
+                      className="text-xs text-white/65 bg-white/[0.04] border border-white/[0.07] rounded-full px-3.5 py-1.5 transition-all duration-300 font-mono hover:text-white"
+                      onMouseEnter={e => (e.currentTarget.style.borderColor = `${cat.accent}40`)}
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+          </div>
+        </div>
 
-            {/* Certifications */}
-            <motion.div
-              variants={fadeUp}
-              className="rounded-2xl border border-white/[0.07] p-6"
-              style={{ backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", background: "rgba(10,10,16,0.65)" }}
-            >
+        {/* Right column */}
+        <motion.div
+          className="space-y-12"
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+
+          {/* Certifications */}
+          <motion.div variants={fadeUp}>
+            <GlassCard>
               <h4 className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
                 style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Certifications
@@ -150,14 +120,12 @@ export default function Skills() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </GlassCard>
+          </motion.div>
 
-            {/* Currently Learning */}
-            <motion.div
-              variants={fadeUp}
-              className="rounded-2xl border border-[#00D9FF]/10 p-6"
-              style={{ backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", background: "rgba(10,10,16,0.65)" }}
-            >
+          {/* Currently Learning */}
+          <motion.div variants={fadeUp}>
+            <GlassCard accentColor="#00D9FF">
               <h4 className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
                 style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Currently Learning
@@ -170,14 +138,12 @@ export default function Skills() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </GlassCard>
+          </motion.div>
 
-            {/* Languages */}
-            <motion.div
-              variants={fadeUp}
-              className="rounded-2xl border border-white/[0.07] p-6"
-              style={{ backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", background: "rgba(10,10,16,0.65)" }}
-            >
+          {/* Languages */}
+          <motion.div variants={fadeUp}>
+            <GlassCard>
               <h4 className="text-xs font-mono tracking-[0.2em] text-white/55 uppercase mb-5">Languages</h4>
               <div className="space-y-0">
                 {languages.map(({ lang, badge, sub }) => (
@@ -194,11 +160,11 @@ export default function Skills() {
                   </div>
                 ))}
               </div>
-            </motion.div>
-
+            </GlassCard>
           </motion.div>
-        </div>
+
+        </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

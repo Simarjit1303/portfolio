@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <radialGradient id="glow-01" cx="20%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#00D9FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00D9FF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-01" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="2" height="2" rx="1" fill="#00D9FF" opacity="0.08"/>
+    </pattern>
+    <style>
+      .title-01 { font-family: 'Exo 2', system-ui, sans-serif; font-weight: 900; }
+      .mono-01  { font-family: 'Space Mono', 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="#0a0a10"/>
+
+  <!-- Glow -->
+  <rect width="800" height="500" fill="url(#glow-01)"/>
+
+  <!-- Grid -->
+  <rect width="800" height="500" fill="url(#grid-01)"/>
+
+  <!-- Accent bar top -->
+  <rect y="0" width="800" height="4" fill="#00D9FF"/>
+
+  <!-- Large project number watermark -->
+  <text x="760" y="470" class="mono-01" font-size="140" fill="#00D9FF" opacity="0.04"
+        text-anchor="end" dominant-baseline="auto">01</text>
+
+  <!-- Content area -->
+  <!-- Type label -->
+  <text x="48" y="80" class="mono-01" font-size="11" fill="#00D9FF" letter-spacing="3"
+        text-anchor="start">GENAI APPLICATION</text>
+
+  <!-- Title -->
+  <text x="48" y="148" class="title-01" font-size="52" fill="#ffffff"
+        font-weight="900" letter-spacing="-1">BOOKVAULT</text>
+
+  <!-- Divider line -->
+  <line x1="48" y1="170" x2="400" y2="170" stroke="#00D9FF" stroke-width="1" stroke-opacity="0.2"/>
+
+  <!-- Tech pills -->
+  <g class="mono-01" font-size="11">
+    <!-- Python pill -->
+    <rect x="48" y="400" width="68" height="26" rx="13" fill="#00D9FF" fill-opacity="0.08" stroke="#00D9FF" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="82" y="418" fill="#00D9FF" fill-opacity="0.8" text-anchor="middle">Python</text>
+    <!-- RAG pill -->
+    <rect x="124" y="400" width="50" height="26" rx="13" fill="#00D9FF" fill-opacity="0.08" stroke="#00D9FF" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="149" y="418" fill="#00D9FF" fill-opacity="0.8" text-anchor="middle">RAG</text>
+    <!-- Docker pill -->
+    <rect x="182" y="400" width="62" height="26" rx="13" fill="#00D9FF" fill-opacity="0.08" stroke="#00D9FF" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="213" y="418" fill="#00D9FF" fill-opacity="0.8" text-anchor="middle">Docker</text>
+    <!-- OCR pill -->
+    <rect x="252" y="400" width="50" height="26" rx="13" fill="#00D9FF" fill-opacity="0.08" stroke="#00D9FF" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="277" y="418" fill="#00D9FF" fill-opacity="0.8" text-anchor="middle">OCR</text>
+  </g>
+
+  <!-- Bottom accent -->
+  <line x1="48" y1="460" x2="200" y2="460" stroke="#00D9FF" stroke-width="1" stroke-opacity="0.15"/>
+</svg>

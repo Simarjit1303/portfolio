@@ -12,26 +12,30 @@ export default function Model({ onLoad }: { onLoad?: () => void }) {
 
   // Mouse target stored in a ref — no React re-renders on every mouse move
   const mouse = useRef({ x: 0, y: 0 });
+  // Stable ref to actions — avoids stale closure without re-adding event listeners
+  const actionsRef = useRef(actions);
+  useEffect(() => { actionsRef.current = actions; }, [actions]);
 
   useEffect(() => {
-    // Signal to Scene.tsx that the GLB has loaded and component has mounted
+    // Signal to Scene.tsx that the GLB has loaded and component has mounted (once only)
     onLoad?.();
 
     // Start idle skeletal animation
-    if (actions["Idle"]) {
-      actions["Idle"].reset().fadeIn(0.5).play();
+    if (actionsRef.current["Idle"]) {
+      actionsRef.current["Idle"].reset().fadeIn(0.5).play();
     } else {
       console.warn("Model: 'Idle' animation not found in robot.glb — check GLB export");
     }
 
-    // Wave event trigger
+    // Wave event trigger — reads from actionsRef so it always sees current actions
     const handleWave = () => {
-      if (actions["Wave"] && actions["Idle"]) {
-        actions["Idle"].fadeOut(0.5);
-        actions["Wave"].reset().fadeIn(0.5).play();
+      const a = actionsRef.current;
+      if (a["Wave"] && a["Idle"]) {
+        a["Idle"].fadeOut(0.5);
+        a["Wave"].reset().fadeIn(0.5).play();
         setTimeout(() => {
-          actions["Wave"]?.fadeOut(0.5);
-          actions["Idle"]?.reset().fadeIn(0.5).play();
+          actionsRef.current["Wave"]?.fadeOut(0.5);
+          actionsRef.current["Idle"]?.reset().fadeIn(0.5).play();
         }, 3000);
       }
     };
@@ -48,7 +52,8 @@ export default function Model({ onLoad }: { onLoad?: () => void }) {
       window.removeEventListener("robotWave", handleWave);
       window.removeEventListener("mousemove", onMouseMove);
     };
-  }, [actions]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // mount-only — actionsRef keeps actions current without re-running
 
   // GPU render loop — smooth cursor-tracking rotation with spring-like damping
   useFrame((state, delta) => {
