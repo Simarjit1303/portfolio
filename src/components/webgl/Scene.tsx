@@ -12,11 +12,12 @@ export default function Scene() {
     <div className="fixed inset-0" style={{ zIndex: 1, pointerEvents: "none" }} aria-label="Interactive 3D robot animation">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         flat
+        frameloop="always"
         performance={{ min: 0.5 }}
         gl={{
-          antialias: true,
+          antialias: false,
           powerPreference: "high-performance",
           alpha: true,
           stencil: false,

@@ -14,7 +14,7 @@ export function SectionWrapper({ id, children, className = "", decorativeNumber 
       id={id}
       suppressHydrationWarning
       className={`relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden ${className}`}
-      style={{ background: "rgba(18,18,18,0.88)" }}
+      style={{ background: "rgba(18,18,18,0.88)", isolation: "isolate" }}
     >
       {/* Top fade */}
       <div suppressHydrationWarning className="absolute inset-x-0 top-0 h-48 pointer-events-none"

@@ -6,13 +6,13 @@ import { skillCategories, certifications, currentlyLearning, languages } from "@
 import { SectionWrapper, SectionHeader, GlassCard } from "@/components/ui/primitives";
 
 const pillVariant: Variants = {
-  hidden: { opacity: 0, scale: 0.8, y: 8 },
-  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] } },
+  hidden: { opacity: 0, y: 6 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 const pillStagger: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.035, delayChildren: 0.12 } },
+  show: { transition: { staggerChildren: 0.02, delayChildren: 0.06 } },
 };
 
 export default function Skills() {
