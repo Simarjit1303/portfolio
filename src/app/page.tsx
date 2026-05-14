@@ -35,6 +35,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
             <div>
               <p
+                suppressHydrationWarning
                 className="text-[clamp(1.8rem,4vw,3rem)] font-black uppercase tracking-tight leading-none"
                 style={{
                   fontFamily: "var(--font-display)",

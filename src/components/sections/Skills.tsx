@@ -31,7 +31,7 @@ export default function Skills() {
         {/* Tech Stack */}
         <div className="lg:col-span-2 relative">
           {/* Vertical accent line — grid-breaking detail */}
-          <div className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
+          <div suppressHydrationWarning className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
             style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(0,217,255,0.25) 30%, rgba(0,217,255,0.25) 70%, transparent 100%)" }} />
           <div className="lg:pl-6">
           <motion.h4
@@ -97,7 +97,7 @@ export default function Skills() {
           {/* Certifications */}
           <motion.div variants={fadeUp}>
             <GlassCard>
-              <h4 className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
+              <h4 suppressHydrationWarning className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
                 style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Certifications
               </h4>
@@ -129,7 +129,7 @@ export default function Skills() {
           {/* Currently Learning */}
           <motion.div variants={fadeUp}>
             <GlassCard accentColor="#00D9FF">
-              <h4 className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
+              <h4 suppressHydrationWarning className="text-xs font-mono tracking-[0.2em] uppercase mb-5"
                 style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Currently Learning
               </h4>
