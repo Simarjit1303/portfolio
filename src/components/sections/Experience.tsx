@@ -27,9 +27,7 @@ export default function Experience() {
               style={{
                 borderLeftColor: `${exp.accent}44`,
                 borderLeftWidth: 2,
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                background: "rgba(10, 10, 16, 0.72)",
+                background: "rgba(10, 10, 16, 0.92)",
               }}
             >
               <div className="flex flex-col gap-5">

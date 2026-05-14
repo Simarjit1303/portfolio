@@ -22,7 +22,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
       variants={fadeUp}
       suppressHydrationWarning
       className="p-4 rounded-xl border border-white/[0.07] hover:border-[#00D9FF]/20 transition-all duration-300"
-      style={{ backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", background: "rgba(10,10,16,0.55)" }}
+      style={{ background: "rgba(10,10,16,0.88)" }}
     >
       <p suppressHydrationWarning className="text-2xl font-black text-white mb-1"
         style={{ background: "linear-gradient(90deg, #00D9FF, #ffffff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
