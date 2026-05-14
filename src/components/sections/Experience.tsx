@@ -37,13 +37,14 @@ export default function Experience() {
                   <p className="text-4xl font-black text-white/[0.07] font-mono leading-none shrink-0">{exp.num}</p>
                   <div className="text-right space-y-0.5">
                     <p className="text-white/60 font-mono text-xs tracking-wider">{exp.duration}</p>
-                    <p className="font-mono text-[10px] tracking-[0.18em] uppercase" style={{ color: exp.accent }}>
+                    <p suppressHydrationWarning className="font-mono text-[10px] tracking-[0.18em] uppercase" style={{ color: exp.accent }}>
                       {exp.company} — {exp.location}
                     </p>
                   </div>
                 </div>
 
                 <h4
+                  suppressHydrationWarning
                   className="text-xl md:text-2xl font-black uppercase tracking-tight leading-tight"
                   style={{
                     background: `linear-gradient(90deg, #ffffff 0%, ${exp.accent} 100%)`,
@@ -57,7 +58,7 @@ export default function Experience() {
                 <ul className="space-y-2.5">
                   {exp.bullets.map((bullet, j) => (
                     <li key={j} className="text-white/60 text-sm leading-relaxed flex items-start gap-3 hover:text-white/80 transition-colors duration-200">
-                      <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: exp.accent, opacity: 0.6 }} />
+                      <span suppressHydrationWarning className="mt-1.5 shrink-0 w-1 h-1 rounded-full" style={{ backgroundColor: exp.accent, opacity: 0.6 }} />
                       <span>{bullet}</span>
                     </li>
                   ))}
