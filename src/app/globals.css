@@ -87,9 +87,8 @@
 }
 
 html {
-  /* Fluid root: scales entire rem-based layout with viewport width */
-  font-size: clamp(13px, 1.1vw + 8px, 16px);
-  /* Use dynamic viewport height so mobile browser chrome is accounted for */
+  /* Fixed 16px root — fractional clamp values cause sub-pixel text blur */
+  font-size: 16px;
   height: 100%;
 }
 
@@ -100,8 +99,11 @@ body {
   overflow-x: hidden;
   cursor: none;
   min-height: 100%;
-  /* Clip any element that accidentally exceeds viewport width */
   max-width: 100vw;
+  /* Crisp text on dark backgrounds */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
 }
 
 /* Fluid section heights — dvh accounts for mobile browser chrome */
@@ -130,6 +132,13 @@ canvas[style*="position: fixed"],
 .fixed {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Prevent sub-pixel blur on Framer Motion animated elements */
+[style*="transform"],
+[style*="opacity"] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }

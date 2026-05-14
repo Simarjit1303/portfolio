@@ -35,11 +35,9 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
       className="rounded-2xl border p-6 flex flex-col"
       style={{
         background: hovered
-          ? `linear-gradient(135deg, ${p.color}06 0%, rgba(10,10,16,0.97) 100%)`
-          : "rgba(10,10,16,0.82)",
+          ? `linear-gradient(135deg, ${p.color}08 0%, rgba(10,10,16,0.97) 100%)`
+          : "rgba(10,10,16,0.92)",
         borderColor: hovered ? `${p.color}40` : "rgba(255,255,255,0.07)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
         transition: "background 0.3s, border-color 0.3s, transform 0.3s",
       }}

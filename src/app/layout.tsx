@@ -6,21 +6,21 @@ import "./globals.css";
 const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
 });
 
 const spaceMono = Space_Mono({
   variable: "--font-code",
   subsets: ["latin"],
   weight: ["400", "700"],
-  display: "optional",
+  display: "swap",
 });
 
 const exo2 = Exo_2({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["700", "800", "900"],
-  display: "optional",
+  display: "swap",
 });
 
 export const viewport = {
