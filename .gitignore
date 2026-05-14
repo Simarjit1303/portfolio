@@ -52,3 +52,11 @@ next-env.d.ts
 e2e_*.py
 *.py
 .claude/
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

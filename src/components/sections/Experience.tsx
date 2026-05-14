@@ -3,39 +3,13 @@
 import { motion } from "framer-motion";
 import { cardVariant, experienceStagger as stagger } from "@/lib/animations";
 import { experiences } from "@/data/portfolio";
+import { SectionWrapper, SectionHeader } from "@/components/ui/primitives";
 
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 overflow-hidden px-8 md:px-24"
-      style={{ background: "rgba(18,18,18,0.88)" }}
-    >
-      {/* Decorative background number */}
-      <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
-        03
-      </div>
+    <SectionWrapper id="experience" decorativeNumber="03">
 
-      {/* Fade from previous solid section */}
-      <div className="absolute inset-x-0 top-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }} />
-      {/* Fade to next solid section */}
-      <div className="absolute inset-x-0 bottom-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }} />
-
-      <div className="max-w-7xl mx-auto relative w-full">
-
-        <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">Experience</span>
-
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{experiences.length} Roles</span>
-        </motion.div>
+        <SectionHeader label="Experience" right={`${experiences.length} Roles`} />
 
         <motion.div
           className="ml-auto w-full md:w-[58%] space-y-6"
@@ -91,7 +65,6 @@ export default function Experience() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
-    </section>
+    </SectionWrapper>
   );
 }

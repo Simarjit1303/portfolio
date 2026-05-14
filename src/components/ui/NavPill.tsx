@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useSound from "use-sound";
 import MagneticWrapper from "@/components/ui/MagneticWrapper";
+import { scrollToSection } from "@/lib/viewTransitions";
 
 const SECTIONS = [
   { id: "intro",      label: "Home" },
@@ -49,11 +50,7 @@ export default function NavPill() {
     if (id === "contact") {
       window.dispatchEvent(new Event("robotWave"));
     }
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    scrollToSection(id);
   };
 
   return (

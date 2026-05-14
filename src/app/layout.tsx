@@ -23,9 +23,14 @@ const exo2 = Exo_2({
   display: "optional",
 });
 
+export const viewport = {
+  themeColor: "#00D9FF",
+};
+
 export const metadata: Metadata = {
   title: "Simarjit Singh | Data Scientist & AI Engineer — Berlin",
   description: "Portfolio of Simarjit Singh — MSc Data Science & AI, Berlin. Building end-to-end ML pipelines, GenAI apps, and data products. Open to full-time roles.",
+  manifest: "/manifest.json",
   openGraph: {
     title: "Simarjit Singh | Data Scientist & AI Engineer",
     description: "ML pipelines, GenAI applications, and data products. Open to full-time roles in Berlin.",

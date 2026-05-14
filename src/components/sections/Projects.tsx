@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/data/portfolio";
+import { SectionWrapper, SectionHeader } from "@/components/ui/primitives";
 
 const CATEGORIES = ["All", "ML & AI", "Data Analysis", "Computer Vision"] as const;
 type Category = (typeof CATEGORIES)[number];
@@ -44,9 +46,20 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
     >
       {/* Top accent bar */}
       <div
-        className="h-[2px] w-10 rounded-full mb-5"
+        className="h-[2px] w-10 rounded-full mb-4"
         style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}
       />
+
+      {/* Thumbnail */}
+      <div className="w-full h-32 rounded-lg mb-4 overflow-hidden">
+        <Image
+          src={`/thumbnails/${p.num}.svg`}
+          alt={p.title}
+          width={800}
+          height={500}
+          className="w-full h-full object-cover opacity-80"
+        />
+      </div>
 
       {/* Num + year */}
       <div className="flex items-center justify-between mb-3">
@@ -122,39 +135,10 @@ export default function Projects() {
       : projects.filter((p) => categoryMap[p.type] === cat).length;
 
   return (
-    <section
-      id="projects"
-      className="relative z-20 min-h-[100dvh] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-8 md:px-24 overflow-hidden"
-      style={{ background: "rgba(18,18,18,0.88)" }}
-    >
-      {/* Top / bottom fades */}
-      <div
-        className="absolute inset-x-0 top-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, #121212 0%, transparent 100%)" }}
-      />
-      <div
-        className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #121212 0%, transparent 100%)" }}
-      />
-
-      {/* Decorative background number */}
-      <div className="absolute top-8 right-8 text-[180px] font-black text-white/[0.025] leading-none select-none pointer-events-none">
-        02
-      </div>
-
-      <div className="max-w-7xl mx-auto relative w-full">
+    <SectionWrapper id="projects" decorativeNumber="02">
 
         {/* Section header */}
-        <motion.div
-          className="flex items-center justify-between border-t border-white/10 pt-5 mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">■ Selected Works</span>
-          <span className="text-[11px] font-mono tracking-[0.2em] text-white/60 uppercase">{projects.length} Projects</span>
-        </motion.div>
+        <SectionHeader label="Selected Works" right={`${projects.length} Projects`} />
 
         {/* Filter tabs */}
         <motion.div
@@ -195,7 +179,6 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
-      </div>
-    </section>
+    </SectionWrapper>
   );
 }

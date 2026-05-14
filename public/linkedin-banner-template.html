@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1584px;
+      height: 396px;
+      overflow: hidden;
+      background: #0a0a10;
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    /* ── Background gradient mesh ── */
+    .bg-base {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, #0a0a10 0%, #0d0f1a 40%, #0f1218 70%, #121212 100%);
+    }
+
+    /* Grid dots */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0, 217, 255, 0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    /* Diagonal mesh lines */
+    .bg-mesh {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -48deg,
+        transparent,
+        transparent 52px,
+        rgba(0, 217, 255, 0.018) 52px,
+        rgba(0, 217, 255, 0.018) 53px
+      );
+    }
+
+    /* Left glow orb */
+    .glow-left {
+      position: absolute;
+      top: -140px;
+      left: -80px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.09) 0%, transparent 65%);
+    }
+
+    /* Centre-right glow orb */
+    .glow-center {
+      position: absolute;
+      top: -100px;
+      left: 680px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.04) 0%, transparent 65%);
+    }
+
+    /* Top accent bar */
+    .accent-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #00D9FF 0%, rgba(0, 217, 255, 0.3) 60%, transparent 100%);
+      z-index: 10;
+    }
+
+    /* Vertical separator — between left content and skill pills */
+    .separator {
+      position: absolute;
+      left: 480px;
+      top: 12%;
+      height: 76%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.25) 30%, rgba(0, 217, 255, 0.25) 70%, transparent);
+      z-index: 5;
+    }
+
+    /* ── Main layout ── */
+    .container {
+      position: relative;
+      width: 1584px;
+      height: 396px;
+      display: flex;
+      align-items: center;
+      z-index: 5;
+    }
+
+    /* ── Left: identity block ── */
+    .left {
+      width: 480px;
+      flex-shrink: 0;
+      padding: 0 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #00D9FF;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 14px;
+    }
+
+    .name {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .name .first { display: block; }
+    .name .last  { display: block; }
+
+    .title {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.04em;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    .title .accent { color: #00D9FF; }
+
+    .location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.08em;
+    }
+
+    .location-tag::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00D9FF;
+      opacity: 0.5;
+    }
+
+    /* ── Centre/Right: skill pills ── */
+    .right {
+      flex: 1;
+      padding: 0 56px 0 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(0, 217, 255, 0.5);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    /* Pill rows */
+    .pill-row {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 6px 14px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    /* Highlighted pill variant */
+    .pill.hi {
+      color: #00D9FF;
+      background: rgba(0, 217, 255, 0.06);
+      border-color: rgba(0, 217, 255, 0.3);
+    }
+
+    /* Dim pill variant */
+    .pill.dim {
+      color: rgba(255, 255, 255, 0.4);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    /* ── Far right: status block ── */
+    .far-right {
+      width: 220px;
+      flex-shrink: 0;
+      padding-right: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    /* Corner accent mark */
+    .corner-mark {
+      position: absolute;
+      bottom: 28px;
+      right: 52px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.12em;
+      z-index: 5;
+    }
+
+    /* Open to work badge */
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 217, 255, 0.08);
+      border: 1px solid rgba(0, 217, 255, 0.25);
+      border-radius: 100px;
+      padding: 8px 18px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00D9FF;
+      box-shadow: 0 0 6px rgba(0, 217, 255, 0.8);
+    }
+
+    .badge-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #00D9FF;
+      letter-spacing: 0.06em;
+    }
+
+    /* Stats */
+    .stat {
+      text-align: right;
+    }
+
+    .stat-value {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.1em;
+      margin-top: 3px;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Decorative floating squares — far right panel */
+    .float-sq {
+      position: absolute;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      border-radius: 2px;
+      background: rgba(0, 217, 255, 0.03);
+    }
+
+    .fsq1 { width: 18px; height: 18px; top: 52px;  right: 260px; transform: rotate(18deg); }
+    .fsq2 { width: 10px; height: 10px; top: 88px;  right: 228px; transform: rotate(34deg); opacity: 0.5; }
+    .fsq3 { width: 14px; height: 14px; bottom: 60px; right: 244px; transform: rotate(-12deg); opacity: 0.6; }
+  </style>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg-base"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-mesh"></div>
+  <div class="glow-left"></div>
+  <div class="glow-center"></div>
+  <div class="accent-top"></div>
+  <div class="separator"></div>
+
+  <!-- Decorative floating elements -->
+  <div class="float-sq fsq1"></div>
+  <div class="float-sq fsq2"></div>
+  <div class="float-sq fsq3"></div>
+
+  <!-- Main layout -->
+  <div class="container">
+
+    <!-- Left: Identity -->
+    <div class="left">
+      <div class="eyebrow">// Data Scientist</div>
+      <div class="name">
+        <span class="first">SIMARJIT</span>
+        <span class="last">SINGH</span>
+      </div>
+      <div class="title">
+        <span class="accent">AI Engineer</span> · ML &amp; Analytics
+      </div>
+      <div class="location-tag">Berlin · Open to Opportunities</div>
+    </div>
+
+    <!-- Centre: Skill pills -->
+    <div class="right">
+      <div class="section-label">// tech stack</div>
+
+      <div class="pill-row">
+        <span class="pill hi">Python</span>
+        <span class="pill hi">PyTorch</span>
+        <span class="pill hi">LangChain</span>
+        <span class="pill">SQL</span>
+        <span class="pill">scikit-learn</span>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">Pandas</span>
+        <span class="pill">HuggingFace</span>
+        <span class="pill hi">OpenAI API</span>
+        <span class="pill">XGBoost</span>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill dim">Power BI</span>
+        <span class="pill dim">AWS EC2</span>
+        <span class="pill dim">Docker</span>
+        <span class="pill dim">Next.js</span>
+        <span class="pill dim">TensorFlow</span>
+      </div>
+    </div>
+
+    <!-- Far right: Status -->
+    <div class="far-right">
+      <div class="badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Open to Work</span>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div class="stat">
+        <div class="stat-value">200+</div>
+        <div class="stat-label">TEACHING HRS</div>
+      </div>
+
+      <div class="stat-divider"></div>
+
+      <div class="stat">
+        <div class="stat-value">81%</div>
+        <div class="stat-label">ACADEMIC GPA</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Corner watermark -->
+  <div class="corner-mark">simarjitsingh.dev</div>
+
+</body>
+</html>
