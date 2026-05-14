@@ -26,11 +26,10 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
   return (
     <motion.div
       suppressHydrationWarning
-      layout
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.25, delay: index * 0.04, ease: "easeOut" }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2, delay: index * 0.03, ease: "easeOut" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="rounded-2xl border p-6 flex flex-col"
@@ -162,13 +161,13 @@ export default function Projects() {
         </motion.div>
 
         {/* Project grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <AnimatePresence mode="popLayout">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <AnimatePresence mode="wait">
             {filtered.map((p, i) => (
               <ProjectCard key={p.num} p={p} index={i} />
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
     </SectionWrapper>
   );
