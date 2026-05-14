@@ -10,6 +10,7 @@ interface GlassCardProps {
 export function GlassCard({ children, className = "", accentColor, style }: GlassCardProps) {
   return (
     <div
+      suppressHydrationWarning
       className={`rounded-2xl border p-6 ${className}`}
       style={{
         borderColor: accentColor ? `${accentColor}28` : "rgba(255,255,255,0.07)",

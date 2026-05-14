@@ -61,7 +61,7 @@ export default function Education() {
               style={i !== 0 ? { background: "rgba(255,255,255,0.015)", borderColor: "rgba(255,255,255,0.07)" } : undefined}
             >
               {i === 0 && (
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                <div suppressHydrationWarning className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: "radial-gradient(ellipse at top left, rgba(0,217,255,0.06) 0%, transparent 60%)" }} />
               )}
               <div className="relative">
@@ -75,7 +75,7 @@ export default function Education() {
                     {edu.status}
                   </span>
                 </div>
-                <h4 className="text-xl font-black uppercase tracking-tight mb-3 leading-tight"
+                <h4 suppressHydrationWarning className="text-xl font-black uppercase tracking-tight mb-3 leading-tight"
                   style={i === 0
                     ? { fontFamily: "var(--font-display)", background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }
                     : { fontFamily: "var(--font-display)", color: "rgba(255,255,255,0.85)" }

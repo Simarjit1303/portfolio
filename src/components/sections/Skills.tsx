@@ -56,10 +56,11 @@ export default function Skills() {
               <motion.div key={i} variants={fadeUp} className="group">
                 <div className="flex items-center gap-2.5 mb-3">
                   <div
+                    suppressHydrationWarning
                     className="h-px w-0 group-hover:w-5 transition-all duration-300 rounded-full shrink-0"
                     style={{ backgroundColor: cat.accent }}
                   />
-                  <h5 className="text-[10px] font-mono uppercase tracking-[0.18em]"
+                  <h5 suppressHydrationWarning className="text-[10px] font-mono uppercase tracking-[0.18em]"
                     style={{ color: cat.accent, opacity: 0.7 }}>
                     {cat.name}
                   </h5>

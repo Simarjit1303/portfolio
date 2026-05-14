@@ -24,7 +24,7 @@ function AnimatedStat({ numStr, label, delay = 0 }: { numStr: string; label: str
       className="p-4 rounded-xl border border-white/[0.07] hover:border-[#00D9FF]/20 transition-all duration-300"
       style={{ backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", background: "rgba(10,10,16,0.55)" }}
     >
-      <p className="text-2xl font-black text-white mb-1"
+      <p suppressHydrationWarning className="text-2xl font-black text-white mb-1"
         style={{ background: "linear-gradient(90deg, #00D9FF, #ffffff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
         {match ? `${count}${suffix}` : numStr}
       </p>
@@ -54,7 +54,7 @@ export default function About() {
             className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-black uppercase tracking-tight leading-[1.05]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <span style={{ background: "linear-gradient(90deg, #ffffff 0%, #00D9FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span suppressHydrationWarning style={{ background: "linear-gradient(90deg, #ffffff 0%, #00D9FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Data Scientist
             </span>
             <br />
@@ -117,7 +117,7 @@ export default function About() {
             className="mb-6"
             style={{ boxShadow: "0 0 32px rgba(0,217,255,0.05)" }}
           >
-            <h4 className="text-[10px] font-mono tracking-[0.2em] uppercase mb-5"
+            <h4 suppressHydrationWarning className="text-[10px] font-mono tracking-[0.2em] uppercase mb-5"
               style={{ background: "linear-gradient(90deg, #ffffff, #00D9FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Quick Facts
             </h4>

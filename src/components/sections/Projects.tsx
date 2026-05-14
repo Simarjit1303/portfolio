@@ -47,6 +47,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
     >
       {/* Top accent bar */}
       <div
+        suppressHydrationWarning
         className="h-[2px] w-10 rounded-full mb-4"
         style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}
       />
@@ -64,7 +65,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
 
       {/* Num + year */}
       <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color: `${p.color}99` }}>
+        <span suppressHydrationWarning className="font-mono text-[10px] tracking-[0.2em]" style={{ color: `${p.color}99` }}>
           {p.num}
         </span>
         <span className="font-mono text-[10px] text-white/30 tracking-[0.15em]">{p.year}</span>
@@ -79,6 +80,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
       <div className="flex flex-wrap gap-1.5 mb-5">
         {p.techs.map((t) => (
           <span
+            suppressHydrationWarning
             key={t}
             className="text-[10px] font-mono px-2 py-0.5 rounded-full border"
             style={{
@@ -94,6 +96,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
 
       {/* GitHub link */}
       <a
+        suppressHydrationWarning
         href={p.github}
         target="_blank"
         rel="noopener noreferrer"
@@ -136,6 +139,7 @@ export default function Projects() {
         >
           {CATEGORIES.map((cat) => (
             <button
+              suppressHydrationWarning
               key={cat}
               onClick={() => setActiveFilter(cat)}
               className="text-[11px] font-mono tracking-[0.15em] uppercase px-4 py-2 rounded-full border transition-all duration-300"

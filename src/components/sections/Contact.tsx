@@ -108,6 +108,7 @@ export default function Contact() {
           <div className="flex-shrink-0 flex flex-col items-center">
             {/* Avatar / photo placeholder */}
             <div
+              suppressHydrationWarning
               className="relative w-28 h-28 sm:w-36 sm:h-36 lg:w-full lg:h-auto lg:aspect-square rounded-2xl overflow-hidden"
               style={{
                 background:
@@ -128,6 +129,7 @@ export default function Contact() {
 
               {/* bottom accent line */}
               <div
+                suppressHydrationWarning
                 className="absolute bottom-0 left-0 right-0 h-[2px]"
                 style={{
                   background:
@@ -220,6 +222,7 @@ export default function Contact() {
 
             {/* Availability badge */}
             <div
+              suppressHydrationWarning
               className="mt-2 flex items-center gap-2 px-3 py-2 rounded-xl"
               style={{
                 background: "rgba(0,217,255,0.04)",
@@ -313,6 +316,7 @@ export default function Contact() {
                   const active = form.status === value;
                   return (
                     <label
+                      suppressHydrationWarning
                       key={value}
                       className="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-200"
                       style={{
@@ -336,6 +340,7 @@ export default function Contact() {
                       />
                       {/* custom radio dot */}
                       <span
+                        suppressHydrationWarning
                         className="w-3.5 h-3.5 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-200"
                         style={{
                           borderColor: active
@@ -386,6 +391,7 @@ export default function Contact() {
 
             {/* Submit */}
             <button
+              suppressHydrationWarning
               type="submit"
               className="w-full py-3.5 rounded-xl font-mono text-[12px] tracking-[0.2em] uppercase font-bold transition-all duration-300 cursor-pointer"
               style={{
@@ -406,6 +412,7 @@ export default function Contact() {
       {/* ── Email app picker modal ── */}
       {showPicker && (
         <div
+          suppressHydrationWarning
           className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
           onClick={() => setShowPicker(false)}
@@ -417,6 +424,7 @@ export default function Contact() {
             aria-label="Choose your email app"
             tabIndex={-1}
             className="relative w-[min(90vw,360px)] rounded-2xl p-6 space-y-4 outline-none"
+            suppressHydrationWarning
             style={{ background: "#0d1117", border: "1px solid rgba(0,217,255,0.2)" }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -428,6 +436,7 @@ export default function Contact() {
             </h4>
 
             <button
+              suppressHydrationWarning
               onClick={() => openEmail("gmail")}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
               style={{ background: "rgba(234,67,53,0.08)", border: "1px solid rgba(234,67,53,0.25)" }}
@@ -442,6 +451,7 @@ export default function Contact() {
             </button>
 
             <button
+              suppressHydrationWarning
               onClick={() => openEmail("outlook")}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
               style={{ background: "rgba(0,120,212,0.08)", border: "1px solid rgba(0,120,212,0.25)" }}
@@ -459,6 +469,7 @@ export default function Contact() {
             </button>
 
             <button
+              suppressHydrationWarning
               onClick={() => openEmail("default")}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}
