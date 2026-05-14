@@ -123,16 +123,11 @@ export const certifications = [
   { name: "Google Prompting Essentials",                        url: "https://www.coursera.org/account/accomplishments/specialization/ZBMF3YY1VWOU" },
   { name: "Google Data Analytics",                              url: "https://www.coursera.org/account/accomplishments/professional-cert/U5LCGZHJT634" },
   { name: "100 Days of Code: The Complete Python Pro Bootcamp", url: "https://ude.my/UC-87e954c7-f3f1-47fc-b0d0-64b556c801d5" },
-  { name: "Google Advanced Data Analytics",                     url: "https://www.coursera.org/professional-certificates/google-advanced-data-analytics",        pending: true },
-  { name: "Google Cloud Data Analytics",                        url: "https://www.coursera.org/professional-certificates/google-cloud-data-analytics-certificate", pending: true },
-  { name: "Data Analyst in Power BI",                           url: "https://app.datacamp.com/learn/career-tracks/data-analyst-in-power-bi",                    pending: true },
 ];
 
 export const currentlyLearning = [
   "Vector Databases (ChromaDB, Pinecone)",
   "MLflow & Experiment Tracking",
-  "Power BI (DataCamp Professional Path)",
-  "Google Cloud Data Analytics",
 ];
 
 export const languages = [
