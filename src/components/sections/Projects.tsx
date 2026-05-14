@@ -58,7 +58,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
           alt={p.title}
           width={800}
           height={500}
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover object-top opacity-80"
         />
       </div>
 
