@@ -51,7 +51,7 @@ function FeaturedProjectCard({ p }: { p: (typeof projects)[number] }) {
           alt={p.title}
           width={800}
           height={500}
-          className="w-full h-full object-cover object-top opacity-80"
+          className="w-full h-full object-cover object-top"
         />
       </div>
 
@@ -63,6 +63,11 @@ function FeaturedProjectCard({ p }: { p: (typeof projects)[number] }) {
           style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}
         />
 
+        {/* Kicker */}
+        <span suppressHydrationWarning className="block font-mono text-[11px] tracking-[0.2em] uppercase mb-3" style={{ color: p.color }}>
+          {p.type}
+        </span>
+
         {/* Badge + period */}
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
           <span
@@ -72,7 +77,7 @@ function FeaturedProjectCard({ p }: { p: (typeof projects)[number] }) {
           >
             {p.badge}
           </span>
-          <span className="font-mono text-[10px] text-white/30 tracking-[0.15em]">{p.period}</span>
+          <span className="font-mono text-[10px] text-white/60 tracking-[0.15em]">{p.period}</span>
         </div>
 
         <p className="text-white/55 text-sm leading-relaxed mb-5">{p.desc}</p>
@@ -116,7 +121,7 @@ function FeaturedProjectCard({ p }: { p: (typeof projects)[number] }) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-[11px] font-mono tracking-widest uppercase transition-colors duration-200 self-start mt-auto"
-          style={{ color: hovered ? p.color : "rgba(255,255,255,0.25)" }}
+          style={{ color: hovered ? p.color : "rgba(255,255,255,0.6)" }}
         >
           View on GitHub ↗
         </a>
@@ -154,6 +159,11 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
         style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }}
       />
 
+      {/* Kicker */}
+      <span suppressHydrationWarning className="block font-mono text-[11px] tracking-[0.2em] uppercase mb-3" style={{ color: p.color }}>
+        {p.type}
+      </span>
+
       {/* Thumbnail */}
       <div className="w-full h-44 rounded-lg mb-4 overflow-hidden">
         <Image
@@ -162,16 +172,16 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
           alt={p.title}
           width={800}
           height={500}
-          className="w-full h-full object-cover object-top opacity-80"
+          className="w-full h-full object-cover object-top"
         />
       </div>
 
       {/* Num + year */}
       <div className="flex items-center justify-between mb-3">
-        <span suppressHydrationWarning className="font-mono text-[10px] tracking-[0.2em]" style={{ color: `${p.color}99` }}>
+        <span suppressHydrationWarning className="font-mono text-[10px] tracking-[0.2em]" style={{ color: p.color }}>
           {p.num}
         </span>
-        <span className="font-mono text-[10px] text-white/30 tracking-[0.15em]">{p.year}</span>
+        <span className="font-mono text-[10px] text-white/60 tracking-[0.15em]">{p.year}</span>
       </div>
 
       {/* Description — clamped to 3 lines */}
@@ -204,7 +214,7 @@ function ProjectCard({ p, index }: { p: (typeof projects)[number]; index: number
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-[11px] font-mono tracking-widest uppercase transition-colors duration-200 self-start"
-        style={{ color: hovered ? p.color : "rgba(255,255,255,0.25)" }}
+        style={{ color: hovered ? p.color : "rgba(255,255,255,0.6)" }}
       >
         View on GitHub ↗
       </a>

@@ -30,9 +30,6 @@
         text-anchor="end" dominant-baseline="auto">10</text>
 
   <!-- Content area -->
-  <!-- Type label -->
-  <text x="48" y="80" class="mono-10" font-size="11" fill="#00D9FF" letter-spacing="3"
-        text-anchor="start">LLM SECURITY RESEARCH</text>
 
   <!-- Title -->
   <g class="title-10" font-size="46" fill="#ffffff" font-weight="900" letter-spacing="-1">
