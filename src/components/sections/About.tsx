@@ -62,18 +62,19 @@ export default function About() {
           </motion.h3>
 
           <motion.p variants={fadeUp} className="text-white/75 text-base leading-relaxed">
-            I&apos;m Simarjit — a 24-year-old Data Scientist and AI/ML Engineer currently pursuing my
-            MSc in Data Science, AI &amp; Digital Business at GISMA University in Potsdam, Germany.
+            I&apos;m Simarjit — a Data Scientist and AI/ML Engineer who has just completed my MSc in
+            Data Science, AI &amp; Digital Business at GISMA University in Potsdam, Germany (thesis
+            defended October 2026).
           </motion.p>
 
           <motion.p variants={fadeUp} className="text-white/65 text-base leading-relaxed">
             I build end-to-end ML pipelines, GenAI applications, and data products — from raw data
-            ingestion through to deployed, production-ready systems. My work sits at the intersection
+            ingestion through to deployed, hands-on systems. My work sits at the intersection
             of machine learning, LLMs, and business intelligence.
           </motion.p>
 
           <motion.p variants={fadeUp} className="text-white/65 text-base leading-relaxed">
-            Before Berlin, I spent 2+ years at AISECT as a Data Analyst and Python Instructor — trained 50+ students in Python and ML. Full story in Experience below.
+            Before Berlin, I spent ~2 years at AISECT as a Data Analyst and Python Instructor — trained 50+ students in Python and ML. Full story in Experience below.
           </motion.p>
 
           {/* Stats row */}

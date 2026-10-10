@@ -105,14 +105,18 @@ export default function Skills() {
                 {certifications.map((cert, i) => (
                   <li key={i} className="flex items-start gap-3 leading-relaxed">
                     <span className="shrink-0 mt-1.5 w-1 h-1 rounded-full bg-[#00D9FF]/60" />
-                    <a
-                      href={cert.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/55 text-xs font-mono hover:text-[#00D9FF] transition-colors duration-200 leading-relaxed"
-                    >
-                      {cert.name} ↗
-                    </a>
+                    {cert.url ? (
+                      <a
+                        href={cert.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/55 text-xs font-mono hover:text-[#00D9FF] transition-colors duration-200 leading-relaxed"
+                      >
+                        {cert.name} ↗
+                      </a>
+                    ) : (
+                      <span className="text-white/55 text-xs font-mono leading-relaxed">{cert.name}</span>
+                    )}
                   </li>
                 ))}
               </ul>

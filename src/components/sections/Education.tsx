@@ -21,8 +21,8 @@ export default function Education() {
       degree: "MSc Data Science, AI & Digital Business",
       institution: "GISMA University of Applied Sciences",
       location: "Potsdam, Germany",
-      duration: "September 2024 – Present",
-      status: "In Progress",
+      duration: "September 2024 – November 2026",
+      status: "Thesis Defended",
     },
     {
       degree: "Bachelor of Computer Applications",
@@ -68,7 +68,7 @@ export default function Education() {
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-white/55 font-mono text-[10px] tracking-[0.18em] uppercase">{edu.duration}</p>
                   <span className={`text-[9px] font-mono tracking-[0.15em] uppercase px-3 py-1 rounded-full border ${
-                    edu.status === "In Progress"
+                    i === 0
                       ? "text-[#00D9FF] border-[#00D9FF]/30 bg-[#00D9FF]/[0.08]"
                       : "text-white/65 border-white/10 bg-white/[0.03]"
                   }`}>

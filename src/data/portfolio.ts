@@ -8,8 +8,8 @@ export const facts = [
 export const stats = [
   { num: "200+",  label: "Students Trained" },
   { num: "10",    label: "Projects Shipped" },
-  { num: "2+yrs", label: "Industry Experience" },
-  { num: "10",    label: "Certifications" },
+  { num: "~2yrs", label: "Industry Experience" },
+  { num: "9",     label: "Certifications" },
 ];
 
 export const projects = [
@@ -126,21 +126,23 @@ export const projects = [
 export const skillCategories = [
   { name: "Programming",           accent: "#00D9FF", skills: "Python, SQL, R, C++, Google BigQuery, DAX" },
   { name: "AI & Machine Learning", accent: "#FFB800", skills: "Pandas, NumPy, Scikit-learn, SciPy, Statsmodels, TensorFlow, Keras, PyTorch, HuggingFace Transformers, OpenCV, XGBoost, NLP, TF-IDF, Text Classification, ANN, CNN, RNN" },
-  { name: "LLMs & Generative AI",  accent: "#00D9FF", skills: "OpenAI API, LangChain, LlamaIndex, RAG Architecture, Streamlit, FastAPI" },
-  { name: "Cloud & DevOps",        accent: "#FFB800", skills: "AWS EC2, Google Cloud, Docker, Linux, Git, CI/CD, GitHub Actions, Cloudflare, Nginx" },
-  { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Statistical Hypothesis Testing, Time-series analysis, Data validation, Hyperparameter tuning, Cross-validation" },
+  { name: "LLMs & Generative AI",  accent: "#00D9FF", skills: "OpenAI API, LangChain, LlamaIndex, RAG Architecture, vLLM, FAISS, LLM red-teaming (prompt injection, jailbreaks), Streamlit, FastAPI" },
+  { name: "Cloud & DevOps",        accent: "#FFB800", skills: "AWS EC2, Google Cloud, RunPod (A100 GPU orchestration), Docker, Linux, Git, CI/CD, GitHub Actions, Cloudflare, Nginx" },
+  { name: "Data Engineering",      accent: "#00D9FF", skills: "ETL pipeline design, Feature engineering, EDA, Statistical Hypothesis Testing, Time-series analysis, Paired significance testing (McNemar, Fisher, bootstrap CIs), Data validation, Hyperparameter tuning, Cross-validation, EU AI Act (Art. 15) robustness evaluation" },
   { name: "Business Intelligence", accent: "#FFB800", skills: "Power BI, Tableau, Matplotlib, Seaborn, Plotly, Excel, Google Sheets" },
   { name: "Databases",             accent: "#00D9FF", skills: "MySQL, PostgreSQL, SQLite, MongoDB, BigQuery" },
 ];
 
-export const certifications = [
+export const certifications: { name: string; url?: string }[] = [
   { name: "Mayerfeld Practicum Program",                        url: "https://credsverse.com/credentials/a039efd3-ecf5-4a8a-87f4-844d4c245ac2" },
   { name: "Google AI Essentials",                               url: "https://www.coursera.org/account/accomplishments/specialization/HOM2AMDIQHE4" },
   { name: "Google AI",                                          url: "https://www.coursera.org/account/accomplishments/professional-cert/LUSNVR4VN7UW" },
-  { name: "Google Gen AI Leader",                               url: "https://www.skills.google/public_profiles/814efbb9-3247-4f4f-b9bc-bcfbc646c2a9" },
   { name: "Google Prompting Essentials",                        url: "https://www.coursera.org/account/accomplishments/specialization/ZBMF3YY1VWOU" },
   { name: "Google Data Analytics",                              url: "https://www.coursera.org/account/accomplishments/professional-cert/U5LCGZHJT634" },
   { name: "100 Days of Code: The Complete Python Pro Bootcamp", url: "https://ude.my/UC-87e954c7-f3f1-47fc-b0d0-64b556c801d5" },
+  { name: "Microsoft Future Ready: Data Science Research Methods Using Python Programming" },
+  { name: "Introduction to Data Analytics with Python" },
+  { name: "Excel Skills to Make an Impression" },
 ];
 
 export const currentlyLearning = [
