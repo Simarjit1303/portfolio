@@ -60,3 +60,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
