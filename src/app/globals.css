@@ -97,7 +97,6 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
   overflow-x: hidden;
-  cursor: none;
   min-height: 100%;
   max-width: 100vw;
   /* Crisp text on dark backgrounds */
@@ -110,9 +109,10 @@ body {
 .h-screen-fluid { height: 100dvh; }
 .min-h-screen-fluid { min-height: 100dvh; }
 
-/* Restore cursor on touch/mobile where custom cursor is hidden */
-@media (hover: none) {
-  body, html { cursor: auto; }
+/* Hide the native cursor only where the custom <Cursor /> dot is shown
+   (hover-capable pointer, md breakpoint and up — matches its `hidden md:block`) */
+@media (hover: hover) and (min-width: 768px) {
+  body { cursor: none; }
 }
 
 /* Globally nuke all scrollbars but retain native scroll physics */

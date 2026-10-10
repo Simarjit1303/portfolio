@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Cursor from "@/components/ui/Cursor";
 
 export type LegalSection = { heading: string; body: React.ReactNode };
 
@@ -16,6 +17,7 @@ interface LegalPageProps {
 export function LegalPage({ lang, label, title, updated, backLabel, switchHref, switchLabel, sections }: LegalPageProps) {
   return (
     <main lang={lang} className="min-h-[100dvh] bg-[#121212] px-6 sm:px-8 md:px-24 py-16 md:py-24">
+      <Cursor />
       <div className="max-w-3xl mx-auto">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
