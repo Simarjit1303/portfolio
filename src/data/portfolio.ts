@@ -49,7 +49,7 @@ export const projects = [
     techs: ["Python", "Pandas", "SciPy", "Plotly", "SQL", "Seaborn"],
     desc: "EDA and hypothesis testing on a 4-table e-commerce dataset (10K customers, 45K transactions, 70K sessions) — 10 statistical tests (t-test, chi-squared, Pearson r), Cohen's d effect sizes, and business insights on discount impact, acquisition channels, and revenue trends.",
     color: "#00FF88",
-    github: "https://github.com/Simarjit1303/Projects/tree/main/E-Commerce-Customer-Behaviour-Analysis",
+    github: "https://github.com/Simarjit1303/Projects/tree/main/Data%20Analytics/E-Commerce-Customer-Behaviour-Analysis",
   },
   {
     num: "03",
