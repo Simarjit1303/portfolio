@@ -7,6 +7,7 @@ import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
 import Skills from "@/components/sections/Skills";
 import Contact from "@/components/sections/Contact";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
         <Education />
         <Skills />
         <Contact />
-        <footer suppressHydrationWarning className="relative z-20 pt-10 pb-8 px-8 border-t border-white/[0.06]"
+        <footer suppressHydrationWarning className="relative z-20 pt-10 pb-28 sm:pb-8 px-8 border-t border-white/[0.06]"
           style={{ background: "#0d1117" }}>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
             <div>
@@ -48,9 +49,17 @@ export default function Home() {
                 Data Scientist · GenAI · Berlin
               </p>
             </div>
-            <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
-              © 2026
-            </span>
+            <div className="flex items-center gap-5">
+              <Link
+                href="/privacy"
+                className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/50 hover:text-[#00D9FF] transition-colors duration-200"
+              >
+                Privacy
+              </Link>
+              <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
+                © 2026
+              </span>
+            </div>
           </div>
         </footer>
       </div>

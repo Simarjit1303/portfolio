@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { SectionWrapper, SectionHeader, GlassCard } from "@/components/ui/primitives";
 
-type Status = "project" | "recruiter" | "other" | "";
+type Status = "research" | "recruiter" | "other" | "";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -48,7 +48,7 @@ export default function Contact() {
     // H-01: strip HTML chars before encoding — defense-in-depth against body injection
     const san = (s: string) => s.replace(/[<>"']/g, "");
     const subjectLabel =
-      form.status === "project" ? "Project Collaboration"
+      form.status === "research" ? "Research & Open Source"
       : form.status === "recruiter" ? "Recruiter Inquiry"
       : "Just Connecting";
     const subject = san(`[${subjectLabel}] — ${form.fullName}`);
@@ -309,7 +309,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {(
                   [
-                    { value: "project", label: "I Have a Project", icon: <svg suppressHydrationWarning width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
+                    { value: "research", label: "Research & Open Source", icon: <svg suppressHydrationWarning width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
                     { value: "recruiter", label: "I Am a Recruiter", icon: <svg suppressHydrationWarning width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> },
                     { value: "other", label: "Just Connecting", icon: <svg suppressHydrationWarning width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
                   ] as { value: Status; label: string; icon: React.ReactNode }[]
@@ -382,7 +382,7 @@ export default function Contact() {
               <textarea
                 id="moreInfo"
                 rows={4}
-                placeholder="Tell me about your project, role, or what you have in mind…"
+                placeholder="Tell me about the role, a research idea, or what you have in mind…"
                 value={form.moreInfo}
                 onChange={(e) => { setForm({ ...form, moreInfo: e.target.value }); clearError("moreInfo"); }}
                 className={`w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-white/80 text-sm font-mono placeholder:text-white/42 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 resize-none ${errors.moreInfo ? "border-red-500/60 focus:border-red-500/80" : "border-white/[0.08] focus:border-[#00D9FF]/40"}`}
