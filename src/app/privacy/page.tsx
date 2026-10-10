@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LegalPage, ContactEmail, type LegalSection } from "@/components/ui/LegalPage";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Simarjit Singh",
   description: "How simarjit.de handles personal data.",
+  alternates: { languages: { de: "/datenschutz" } },
 };
 
-const sections: { heading: string; body: React.ReactNode }[] = [
+const sections: LegalSection[] = [
   {
     heading: "Who is responsible",
     body: (
       <p>
         This is the personal portfolio website of Simarjit Singh, Berlin, Germany. The controller
-        under the GDPR is Simarjit Singh, reachable at{" "}
-        <a href="mailto:simarjit1303@gmail.com" className="text-[#00D9FF] hover:underline">
-          simarjit1303@gmail.com
-        </a>
-        .
+        under the GDPR is Simarjit Singh, reachable at <ContactEmail />.
       </p>
     ),
   },
@@ -95,38 +92,15 @@ const sections: { heading: string; body: React.ReactNode }[] = [
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-[100dvh] bg-[#121212] px-6 sm:px-8 md:px-24 py-16 md:py-24">
-      <div className="max-w-3xl mx-auto">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-[11px] font-mono tracking-widest uppercase text-white/60 hover:text-[#00D9FF] transition-colors duration-200"
-        >
-          ← Back to portfolio
-        </Link>
-
-        <div className="h-[2px] w-10 rounded-full mt-10 mb-4" style={{ background: "linear-gradient(90deg, #00D9FF, transparent)" }} />
-        <p className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/60">■ Legal</p>
-        <h1
-          className="text-[clamp(2rem,5vw,3.25rem)] font-black uppercase tracking-tight leading-none text-white mt-3"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          Privacy Policy
-        </h1>
-        <p className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/60 mt-4">
-          Last updated: 10 October 2026
-        </p>
-
-        <div className="mt-12 space-y-10">
-          {sections.map(({ heading, body }) => (
-            <section key={heading}>
-              <h2 className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#00D9FF] mb-3">
-                {heading}
-              </h2>
-              <div className="text-white/70 text-sm leading-relaxed">{body}</div>
-            </section>
-          ))}
-        </div>
-      </div>
-    </main>
+    <LegalPage
+      lang="en"
+      label="Legal"
+      title="Privacy Policy"
+      updated="Last updated: 10 October 2026"
+      backLabel="Back to portfolio"
+      switchHref="/datenschutz"
+      switchLabel="Deutsche Version"
+      sections={sections}
+    />
   );
 }

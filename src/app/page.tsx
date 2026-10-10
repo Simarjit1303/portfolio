@@ -56,6 +56,13 @@ export default function Home() {
               >
                 Privacy
               </Link>
+              <Link
+                href="/datenschutz"
+                lang="de"
+                className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/50 hover:text-[#00D9FF] transition-colors duration-200"
+              >
+                Datenschutz
+              </Link>
               <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-white/15">
                 © 2026
               </span>
