@@ -7,12 +7,30 @@ export const facts = [
 
 export const stats = [
   { num: "200+",  label: "Students Trained" },
-  { num: "9",     label: "Projects Shipped" },
+  { num: "10",    label: "Projects Shipped" },
   { num: "2+yrs", label: "Industry Experience" },
   { num: "10",    label: "Certifications" },
 ];
 
 export const projects = [
+  {
+    num: "10",
+    title: "Adversarial Robustness of Open-Source RAG Pipelines",
+    type: "LLM Security Research",
+    year: "2026",
+    period: "05/2026 – 10/2026",
+    featured: true,
+    badge: "MSc Thesis · 2026",
+    highlights: [
+      { value: "3", label: "Attacks" },
+      { value: "4", label: "LLMs" },
+      { value: "3", label: "Defences" },
+    ],
+    techs: ["Python", "PyTorch", "HuggingFace", "vLLM", "FAISS", "Docker"],
+    desc: "Controlled benchmark of 3 attacks (indirect prompt injection, PoisonedRAG, Crescendo multi-turn jailbreak) against 4 open-weight LLMs (Llama-3.1-8B, Qwen3-8B, Phi-4-mini, Ministral-3-8B) in a FAISS-backed RAG pipeline, with 3 low-cost defences. Exact paired statistics (McNemar, Fisher, Holm-Bonferroni, bootstrap CIs) on RunPod A100 GPUs, mapped to EU AI Act Article 15. Only spotlighting showed a confirmed defensive effect, at a utility cost of about 0.28 F1.",
+    color: "#00D9FF",
+    github: "https://github.com/Simarjit1303/rag-adversarial-robustness",
+  },
   {
     num: "01",
     title: "BookVault",
